@@ -7,7 +7,8 @@ Team Members:
 	Vassilios Simeonidis
 	Yihang Zhao
 	Teppei Onishi	
-Rayan Cooper
+    Rayan Cooper
+    
 Lab Section: 
 	L02 - Tuesday 2-4pm
 
