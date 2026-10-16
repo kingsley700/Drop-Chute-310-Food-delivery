@@ -1,5 +1,6 @@
-#resturaunt ids are non null numbered 1-2-3-4
-#recommened upgrade later use some hashmap or similar
+#resturaunt ids are non null from the smallest to largest id.
+#any action to delete, add or swap a resturaunt will automatically shuffle it
+#if something breaks or is needed to be added email: vassilios.simeonidi@gmail.com
 
 
 import json
@@ -156,11 +157,3 @@ def _write_data(restaurants):
     """Writes restaurants to the JSON file."""
     with open(filep, "w", encoding="utf-8") as file:
         json.dump(restaurants, file, indent=2, ensure_ascii=False)
-
-
-def get_restaurant(name: str):
-    """Returns a restaurant based on name."""
-    for restaurant in get_restaurants():
-        if restaurant["name"].lower() == name.lower():
-            return restaurant
-    return None
