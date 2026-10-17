@@ -23,7 +23,7 @@ When and where will you meet?
 	We will meet during and after our lab section, in Arts 204. Tuesdays 4-6pm after our lab, and Thursdays from 4-6pm. 
 
 What happens if someone cannot attend?
-	If someone cannot attend, we will try to fill the person in on any details they missed. We can provide them with a text document on what they missed, along with a brief explanation in the next meeting.
+	If someone cannot attend, we will try to fill the person in on any details they missed. We can provide them with a text document on what they missed, along with a brief explanation in the next meeting. A couple times a team member has missed a meeting due to personal reasons, however we were able to catch them up on important details in the discord and the next meetings. They also gave us notice ahead of time so we were able to adjust quickly.
 
 What communication tools will you use?
 	We have decided to use discord to communicate with each other. It was the one platform that we all had in common. 
@@ -59,23 +59,22 @@ How will your team make decisions?
 	Decisions will be made together in meetings, or through discord communications. In meetings, we can form agreements based on a voting system, or by using the wheel. 
 
 How will your team handle disagreements?
-	In the event of an equal number of votes being counted upon opposing perspectives, a coin can be tossed and the result must be respected by everyone in the group.
+	In the event of a disagreement, the whole team will come together to face the challenge together. From personal disagreements to project disagreements, our team can discuss as adults to come to a conclusion. 
 
 Identify potential challenges your team may face and explain how you will address them.
-	We could face challenges in scheduling, as some may face more workload with other courses in specific weeks/days. Although we are confident in our abilities, we may face merge conflicts, or other issues in GitHub. 
+	We could face challenges in scheduling, as some may face more workload with other courses in specific weeks/days. We had a few challenges with other schoolwork interfering with work, but we were able to overcome them. Hopefully in the future, we are able to avoid these challenges. 
 
 Each team member should state what they personally commit to contributing to the team.
-    Vassilios Simeonidis:
-I am tasked with service, repository, and data. I create the service layer, which will handle the business logic behind restaurant-list. I also build the repository and persistence layer, which is responsible for reading data from JSON or CSV files. I will create that data myself, making sure there are at least two restaurants in them. I am responsible for making sure that the route, service, repository, persistence chain is wired correctly, end-to-end. 
+
+	Vassilios Simeonidis:
+I am in charge of the backend, working on repositories and services. I define the functions that create, delete, update, and add data, forming the core logic of our platform. 
 
 	Chance Dreyer:
-My role will be API and routing. I will set up the basic structure of FastAPI, following the README. I will build a simple check to confirm that the app is running with a GET /health endpoint, along with the route layer for the restaurant-list endpoint, handling how requests are directed. I will also confirm that the /docs page will render correctly. 
+I am working on the Frontend, using html and javascript to let our clients use the platform. Focusing on creating a clear and responsive interface.
 
 	Teppei Onishi:
-I will be responsible for documentation and submission. Writing and completing the README, with clear and clean setup instructions, and testing it myself on a fresh clone to test its functionality. I will create the foundation-gate tag and record the submitted commit SHA. I have drafted the team agreement with oversight from everyone else, and will confirm that the teaching team has access to the repo, along with the project board. 
+I am testing, taking everyone's code, and providing proper tests that cover them. I will check that each function behaves as expected.
 
-    Rayan Cooper:
-I will be focused on testing. Running automated tests with pytest, writing tests for the /health endpoint to make sure it works correctly, and testing the restaurant-list functionality for the expected case (happy path). Finally, I would write at least one failure case to test if the project handles errors properly. 
-
-
+Rayan Cooper:
+I will be working with api’s, building the connections that let the frontend and backend communicate. I design and maintain the endpoints so that data flows smoothly.
 
