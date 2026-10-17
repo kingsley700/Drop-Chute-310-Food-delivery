@@ -118,5 +118,5 @@ function displayMenu(items) {
 document.getElementById("back-button")
     .addEventListener("click", () => {
         document.getElementById("restaurant-details").hidden = true;
-        document.getElementById("restaurants-view").hidden = false;
+        document.getElementById("restaurant-view").hidden = false;
     });
