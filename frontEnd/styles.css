@@ -1,0 +1,18 @@
+body {
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 24px;
+}
+h1 {
+    margin-bottom: 24px;
+}
+
+#restaurant-list {
+    padding-left: 20px;
+}
+
+#restaurant-list {
+    padding: 12px, 0;
+    border-bottom: 1px solid #ddd;
+}
