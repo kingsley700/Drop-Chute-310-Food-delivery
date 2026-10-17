@@ -25,6 +25,7 @@ async function loadRestaurants() {
         restaurants = await response.json();
 
         displayRestaurants(restaurants);
+        populateManagerRestaurantOptions();
 
         if (restaurants.length === 0) {
             statusElement.textContent = "No restaurants found.";
@@ -187,3 +188,72 @@ createForm.addEventListener("submit", async function (event) {
             "Could not create restaurant. Check API and try again.";
     }
 });
+const managerItemRestaurant =
+    document.getElementById("manager-item-restaurant");
+
+function populateManagerRestaurantOptions(){
+    managerItemRestaurant.replaceChildren();
+
+    const placeholder = document.createElement("option");
+    placeholder.value = "";
+    placeholder.textContent = "Choose a restaurant";
+
+    managerItemRestaurant.appendChild(placeholder);
+
+    for (const restaurant of restaurants) {
+        const option = document.createElement("option");
+
+        option.value=restaurant.id
+        option.textContent =
+            `${restaurant.name} - ${restaurant.cuisine}`;
+
+        managerItemRestaurant.appendChild(option);
+    }
+}
+const restaurantManagerStatus =
+    document.getElementById("restaurant-manager-status");
+const itemManagerStatus =
+    document.getElementById("item-manager-status");
+
+document.getElementById("manager-restaurant-form")
+    .addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        restaurantManagerStatus.textContent =
+            "Restaurant creation interface selected" +
+            "This operation is not connected yet.";
+    });
+
+document.getElementById("edit-restaurant-button")
+    .addEventListener("click", function() {
+        restaurantManagerStatus.textContent =
+            "Restaurant editiing interface selected" +
+            "This operation is not connected yet.";
+    });
+
+document.getElementById("delete-restaurant-button")
+    .addEventListener("click", function() {
+        restaurantManagerStatus.textContent = 
+            "Restaurant delete interface selected" +
+            "This operation is not connected yet.";
+    });
+document.getElementById("manager-item-form")
+    .addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        itemManagerStatus.textContent =
+            "Menu item creation interface selected" +
+            "This operation is not connected yet.";
+    });
+document.getElementById("edit-item-button")
+    .addEventListener("click", function() {
+        itemManagerStatus.textContent =
+        "Menu item interface selected" +
+        "This operation is not connected yet.";
+    });
+document.getElementById("delete-item-button")
+    .addEventListener("click", function() {
+        itemManagerStatus.textContent =
+        "Menu item delete interface selected" +
+        "This operation is not connected yet.";
+    });

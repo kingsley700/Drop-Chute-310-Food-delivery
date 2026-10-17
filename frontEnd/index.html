@@ -68,6 +68,92 @@
             <p id="create-status" role="status"></p>
 
         </section>
+        <section id="restaurant-manager">
+            <h2>Restaurant Managment</h2>
+
+            <p>
+                Use this section to manage Restaurants and their menu items.
+            </p>
+
+            <section> 
+                <h3>Manage Restaurants</h3>
+
+                <form id="manager-restaurant-form">
+                    <label for="management-restaurant-name">
+                        Restaurant name:
+                    </label>
+                    <input
+                        type="text"
+                        id="manager-restaurant-name"
+                        placeholder="Enter restaurant name"
+                        required
+                     >
+
+                    <label for="manager-restaurant-cuisine">
+                        Cuisine:    
+                    </label>
+                    <input
+                        type="text"
+                        id="manager-restaurant-cuisine"
+                        placeholder="Enter cuisine"
+                        required
+                    >
+
+                    <button type="button" id="edit-restaurant-button">
+                        Edit Restaurant
+                    </button>
+                    <button type="button" id="delete-restaurant-button">
+                        Delete Restaurant
+                    </button>
+                </form>
+
+                <p id="restaurant-manager-status" role="status"></p>
+            </section>
+                <h3>Manage Menu Items</h3>
+
+                <label for="manager-item-restaurant">
+                    Select Restaurant
+                </label>
+                <select id="manager-item-restaurant">
+                    <option value="">Choose a restaurant</option>
+                </select>
+
+                <form id="manager-item-form">
+                    <label for="manager-item-name">Item Name</label>
+                    <input 
+                        type="text"
+                        id="manager-item-name"
+                        placeholder="Enter item name"
+                        required
+                    >
+
+                    <label for="manager-item-price">Price:</label>
+                    <input
+                        type="text"
+                        id="manager-item-price"
+                        min="0"
+                        step="0.01"
+                        placeholder="0.00"
+                        required
+                    >
+
+                    <label for="manager-item-description">Description:</label>
+                    <textarea 
+                        id="manager-item-description"
+                        placeholder="Enter item description"
+                    ></textarea>
+
+                    <button type="submit">Add menu item</button>
+                    <button type="button" id="edit-item-button">
+                        Edit Menu Item
+                    </button>
+                    <button type="button" id="delete-item-button">
+                        Delete Menu Item
+                    </button>
+                </form>
+
+                <p id="item-manager-status" role="status"></p>
+        </section>
     </main>
 </body>
 </html>
