@@ -78,4 +78,45 @@ function showRestaurantDetails(restaurantId) {
 
     displayMenu(restaurant.items);  
 }
+function displayMenu(items) {
+    const menuList = document.getElementById("menu-list");
+    const menuStatus = document.getElementById("menu-status");
 
+    menuList.replaceChildren();
+
+    if (!items || items.length === 0) {
+        menuStatus.textContent = "No menu items available.";
+        return; 
+    }
+
+    menuStatus.textContent = `${items.length} menu items`;
+
+    for (const item of items) {
+        const listItem = document.createElement("li");
+        const name = document.createElement("h4");
+        const price = document.createElement("p");
+        const description = document.createElement("p");
+
+        name.textContent = item.name;
+
+        price.textContent = Number(item.price).toLocaleString(
+            "en-CA",
+            {
+                style: "currency",
+                currency: "CAD"
+            }
+        );
+
+        description.textContent =
+            item.description || "No description available";
+
+        listItem.append(name, price, description);
+        menuList.appendChild(listItem);
+    }
+}
+
+document.getElementById("back-button")
+    .addEventListener("click", () => {
+        document.getElementById("restaurant-details").hidden = true;
+        document.getElementById("restaurants-view").hidden = false;
+    });
