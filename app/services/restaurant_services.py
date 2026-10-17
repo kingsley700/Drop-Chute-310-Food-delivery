@@ -9,9 +9,9 @@ def get_restaurants():
     return restaurant_repository.get_restaurants()
 
 
-def get_restaurant(restaurant_id: int):
+def get_restaurant_by_id(restaurant_id: int):
     """Returns a restaurant based on ID."""
-    return restaurant_repository.get_restaurant(restaurant_id)
+    return restaurant_repository.get_restaurant_by_id(restaurant_id)
 
 
 def create_restaurant(restaurant: Restaurant):
@@ -54,6 +54,6 @@ def swap_restaurant_id(restaurant_id: int, new_id: int):
     """Swaps a restaurants ID with the second resturaunts ID."""
     return restaurant_repository.swap_restaurant_id(restaurant_id, new_id)
 
-def get_restaurant(name: str):
+def get_restaurant_by_name(name: str):
     """Returns a restaurant based on name."""
-    return restaurant_repository.get_restaurant(name)
+    return restaurant_repository.get_restaurant_by_name(name)

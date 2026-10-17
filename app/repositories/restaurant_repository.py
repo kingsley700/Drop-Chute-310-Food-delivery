@@ -13,7 +13,14 @@ def get_restaurants():
     return _read_data()
 
 
-def get_restaurant(restaurant_id: int):
+def get_restaurant_by_name(name: str):
+    """Returns a restaurant based on name."""
+    for restaurant in get_restaurants():
+        if restaurant["name"].lower() == name.lower():
+            return restaurant
+
+
+def get_restaurant_by_id(restaurant_id: int):
     """Returns a restaurant based on ID."""
     for restaurant in get_restaurants():
         if restaurant["id"] == restaurant_id:
