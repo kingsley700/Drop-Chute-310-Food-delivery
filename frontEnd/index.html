@@ -35,6 +35,39 @@
             <p id="menu-status" role="status"></p>
             <ul id="menu-list"></ul>
         </section>
+        <section id="manager-section">
+            <h2>Restaurant Management</h2>
+            <h3>Create a Restaurant</h3>
+
+            <form id="create-restaurant-form">
+                <div>
+                    <label for="new-restaurant-name">
+                        Restaurant name:
+                    </label>
+                    <input
+                        type="text"
+                        id="new-restaurant-name"
+                        required
+                        >
+                </div>
+
+                <div>
+                    <label for="new-restaurant-cuisine">
+                        Cuisine:
+                    </label>
+                    <input
+                        type="text"
+                        id="new-restaurant-cuisine"
+                        required
+                        >
+                </div>
+
+                <button type="submit">Create Restaurant</button>
+            </form>
+
+            <p id="create-status" role="status"></p>
+
+        </section>
     </main>
 </body>
 </html>
