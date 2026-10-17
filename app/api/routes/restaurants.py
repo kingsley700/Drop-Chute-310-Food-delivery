@@ -18,7 +18,7 @@ def restaurant_list():
     status_code=201,
     responses={500: {"description": "The restaurant data file could not be written"}}
 )
-def create_new_restaurant(restaurant: RestaurantCreate):
+def create_new_restaurant(restaurant: Restaurant):
     return create_restaurant(restaurant)
 
 

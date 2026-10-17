@@ -11,13 +11,6 @@ class Restaurant(BaseModel):
     cuisine: str
     items: list[RestaurantItem]
 
-
-class RestaurantCreate(BaseModel):
-    name: str
-    cuisine: str
-    items: list[RestaurantItem] = Field(default_factory=list)
-
-
 #schema for updating a restaurant
 class RestaurantUpdate(BaseModel):
     name: str | None = None
