@@ -5,7 +5,8 @@ Team Name: Drop Chute
 
 Lab Section:
 >L02 - Tuesday 2-4pm \
-This repository contains Drop Chute's submission for Milestone 0. The application allows customers to discover restaurants, browse items, and place orders. It supports restaurant and platform management for restaurant users and administrators.
+This repository contains Drop Chute's submission for Milestone 1. The application allows customers to discover restaurants, browse items, and place orders. It supports restaurant and platform management for restaurant users and administrators.\
+Implemented so far: a FastAPI backend that serves restaurant and menu data through a layered architecture (Route → Service → Repository → JSON)
 
 
 # Setup
@@ -52,13 +53,21 @@ python -m pytest -v
 ```
 >Note: Use **python -m pytest -v** , not **pytest -v** , to ensure the app package resolves correctly on all setups
 
+### Continuous Integration
+GitHub Actions runs the test suite automatically every push and pull request (see .github\workflows)
+
 # API Endpoints
 
-|Method|Path        |Description                           |
-|------|------------|--------------------------------------|
-|GET   |/           |Welcome message                       |
-|GET   |/health     |Health check, returns {"status": "Ok"}|
-|GET   |/restaurants|Return list of all restaurants        |
+|Method|Path                              |Description                           |
+|------|----------------------------------|--------------------------------------|
+|GET   |/                                 |Welcome message                       |
+|GET   |/health                           |Health check, returns {"status": "Ok"}|
+|GET   |/restaurants                      |Return list of all restaurants        |
+|POST  |/CreateRestaurant                 |Creates a new restaurant              |
+|POST  |/restaurants/{restaurant_id}/items|Adds new menu item with specified ID  |
+|PATCH |/restaurants/{restaurant_id}      |Update a restaurant                   |
+|PATCH |/restaurants/{restaurant_id}/items/{item_name}|Update a menu item        |
+
 
 ### Interactive docs
 FastAPI provides auto-generated interactive API documentation at: 
@@ -74,6 +83,8 @@ Where it is read by **app/repositories/restaurant_repository.py** and served thr
 # Repository Structure
 ```bash
 Drop-Chute-310-Food-delivery/
+├── .github\workflows
+│   └── python-app.yaml
 ├── app/
 │   ├── main.py
 │   ├── api\routes/
@@ -81,7 +92,9 @@ Drop-Chute-310-Food-delivery/
 │   ├── repositories/
 │   │   └── restaurant_repository.py
 │   ├── schemas/
-│   │   └── restaurant.py
+│   │   ├── restaurantschemas.py
+│   │   ├── health.py
+│   │   ├── home.py
 │   └── services/
 │       └── restaurant_services.py
 ├── data/
@@ -91,7 +104,15 @@ Drop-Chute-310-Food-delivery/
 │   ├── README.md
 │   ├── requirements.txt
 │   └── team-agreement.md
+├── frontEnd/
+│   ├── app.js
+│   ├── index.html
+│   └── style.css
 └── tests/
     ├── test_health.py
-    └── test_restaurants.py
+    ├── test_restaurants.py
+    ├── test_restaurant_api.py
+    ├── test_restaurant_data.py
+    ├── test_restaurant_repository.py
+    └── test_restaurant_services.py
 ```
