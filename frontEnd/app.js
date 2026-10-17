@@ -2,6 +2,9 @@ const statusElement =
     document.getElementById("restaurant-status");
 const restaurantList =
     document.getElementById("restaurant-list");
+
+let restaurants = [];
+
 async function loadRestaurants() {
 
     statusElement.textContent = "Loading restaurants...";
@@ -19,7 +22,7 @@ async function loadRestaurants() {
 
         }
 
-        const restaurants = await response.json();
+        restaurants = await response.json();
 
         displayRestaurants(restaurants);
 
@@ -43,10 +46,36 @@ function displayRestaurants(restaurants) {
 
     for (const restaurant of restaurants) {
         const listItem = document.createElement("li");
+        const button = document.createElement("button");
 
-        listItem.textContent =
+        button.type = "button";
+        button.textContent =
             `${restaurant.name} - ${restaurant.cuisine}`;
 
+        button.addEventListener("click", () => {
+            showRestaurantDetails(restaurant.id);
+        });
+
+            listItem.appendChild(button);
             restaurantList.appendChild(listItem);
     }
 }
+function showRestaurantDetails(restaurantId) {
+    const restaurant = restaurants.find(
+        restaurant => restaurant.id === restaurantId
+    );
+
+    if (!restaurant) {
+        statusElement.textContent = "Restaurant not found.";
+        return;
+    }
+
+    document.getElementById("restaurant-view").hidden = true;
+    document.getElementById("restaurant-details").hidden = false;
+
+    document.getElementById("details-name").textContent = restaurant.name;
+    document.getElementById("details-cuisine").textContent = restaurant.cuisine;
+
+    displayMenu(restaurant.items);  
+}
+
