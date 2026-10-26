@@ -4,8 +4,13 @@
 
 
 import json
+from pathlib import Path
 
 filep = "data/restaurants.json"
+
+def _items_path():
+    """items.json is located next to restauarants.json"""
+    return Path(filep).with_name("items.json")
 
 
 def get_restaurants():
@@ -155,12 +160,32 @@ def swap_restaurant_id(restaurant_id: int, new_id: int):
 
 
 def _read_data():
-    """Reads restaurants from the JSON file."""
+    """Reads restaurants and attaches each one's items, keyed by restaurant_id."""
     with open(filep, "r", encoding="utf-8") as file:
-        return json.load(file)
+        restaurants = json.load(file)
+    
+    try:
+        with open(_items_path(), "r", encoding = "utf-8") as file:
+            items = json.load(file)
+    except FileNotFoundError:
+        items = {}
+    
+    for restaurant in restaurants:
+        restaurant["items"] = items.get(str(restaurant["id"]), [])
+    return restaurants
 
 
 def _write_data(restaurants):
-    """Writes restaurants to the JSON file."""
+    """Writes restaurants to JSON file and items.json, hash keyed by restaurant_id."""
+    restaurant_rows = []
+    items = {}
+    
+    for restaurant in restaurants:
+        row = {key: value for key, value in restaurant.items() if key!= "items"}
+        restaurant_rows.append(row)
+        items[str(restaurant["id"])] = restaurant.get("items", [])
+        
     with open(filep, "w", encoding="utf-8") as file:
-        json.dump(restaurants, file, indent=2, ensure_ascii=False)
+        json.dump(restaurant_rows, file, indent=2, ensure_ascii=False)
+    with open(_items_path(), "w", encoding = "utf-8") as file:
+        json.dump(items, file, indent=2, ensure_ascii=False)
