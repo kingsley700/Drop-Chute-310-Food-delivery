@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Drop Chute - Customer</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="customer.js" defer></script>
+</head>
+
+<body>  
+    <header>
+        <h1>Customer Side</h1> <!--temp-->
+    </header>
+
+    <main>
+        <nav>
+            <a href="index.html" class="nav-button">Landing page index</a> <!--This is a temp link that moves us from customer to index-->
+            <a href="restaurant.html" class="nav-button">Restaurant side</a> <!--This is a temp link that moves us from customer to restaurant-->
+        </nav>
+
+        <section id ="restaurant-view" aria-labelledby="restaurant-heading">
+            <h2 id="restaurant-heading">Restaurants</h2>
+            <p id="restaurant-status" role="status">
+                Restaurants will appear here.
+            </p>
+
+            <ul id="restaurant-list"> </ul>
+        </section>    
+        
+        <section id="restaurant-details" hidden>
+            <button id="back-button" type="button">
+                Back to restaurants
+            </button>
+
+            <h2 id="details-name"></h2>
+            <p id="details-cuisine"></p>
+
+            <h3>Menu</h3>
+            <p id="menu-status" role="status"></p>
+            <ul id="menu-list"></ul>
+        </section>
+    </main>
+</body>
