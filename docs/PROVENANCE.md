@@ -38,3 +38,13 @@ Entry 4
 - Influence: None, coded by myself
 - Validation: tested and ensured the code was working and sufficient
 - PR: #23
+
+Entry 5
+- Student: Rayan Cooper
+- Artifact: app\schemas\customerschema.py, app/tests/test_customer_schema.py
+- Label: AI-Assisted
+- AI tool: Claude
+- Purpose: To fix the tests written and ensure that they return errors accordingly
+- Influence: Original code written myself, learned and used methods from Claude's fixes
+- Validation: tested and ensured the code was working and sufficient
+- PR: #58
