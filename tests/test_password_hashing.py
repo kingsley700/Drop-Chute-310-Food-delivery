@@ -3,7 +3,7 @@ import pytest
 
 
 def test_hash_differs_from_plain_password():
-    hashed = hash_password("PlanPass")
+    hashed = hash_password("PlainPass")
     assert hashed != "PlainPass"
     assert "PlainPass" not in hashed
     
