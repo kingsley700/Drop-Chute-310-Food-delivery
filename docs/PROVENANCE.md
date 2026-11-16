@@ -48,3 +48,13 @@ Entry 5
 - Influence: Original code written myself, learned and used methods from Claude's fixes
 - Validation: tested and ensured the code was working and sufficient
 - PR: #58
+
+Entry 6
+- Student: Rayan Cooper
+- Artifact: tests\test_customer_services.py, app\services\customer_services.py
+- Label: AI-Assisted
+- AI tool: Claude
+- Purpose: To fix the tests written and ensure that they return errors accordingly
+- Influence: Required assistance in the creation of the tests due to struggling to understand how certain things worked
+- Validation: tested and ensured the code was working and sufficient
+- PR: #63
