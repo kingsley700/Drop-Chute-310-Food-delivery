@@ -27,7 +27,7 @@ def test_password_length_limits():
     payload["password"] = "a" * 6
     CustomerCreate(**payload)
 
-    payload["password"] = "a" * 84
+    payload["password"] = "a" * 71
     CustomerCreate(**payload)
 
 
