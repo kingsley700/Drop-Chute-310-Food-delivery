@@ -26,6 +26,7 @@ class Customer(BaseModel):
     email: EmailStr
     hashed_password: str
     delivery_address: str
+    is_active: bool = True
 
 
 class CustomerResponse(BaseModel):
