@@ -6,7 +6,7 @@ class CustomerCreate(BaseModel):
 
     name: str = Field(..., min_length=3, max_length=40)
     email: EmailStr
-    password: str = Field(..., min_length=6, max_length=85)
+    password: str = Field(..., min_length=6, max_length=72)
     delivery_address: str = Field(..., min_length=1, max_length=200)
 
     @field_validator("name", "delivery_address")  # To make sure name and address aren't empty
