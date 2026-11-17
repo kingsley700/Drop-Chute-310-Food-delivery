@@ -5,6 +5,7 @@ from app.api.routes.restaurants import router as restaurant_router
 from app.schemas.health import HealthResponse
 from app.schemas.home import HomeResponse
 from fastapi.middleware.cors import CORSMiddleware
+from app.api.routes.cart import router as cart_router
 from app.api.routes import customer_routes
 
 app = FastAPI()
@@ -34,6 +35,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.include_router(cart_router)
 app.include_router(restaurant_router)
 
 
