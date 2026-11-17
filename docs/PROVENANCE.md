@@ -58,3 +58,13 @@ Entry 6
 - Influence: Required assistance in the creation of the tests due to struggling to understand how certain things worked
 - Validation: tested and ensured the code was working and sufficient
 - PR: #63
+
+Entry 7
+- Student: Rayan Cooper
+- Artifact: frontEnd\register.html
+- Label: AI-Assisted
+- AI tool: Claude
+- Purpose: To teach and co-write html and create the requirements of the page
+- Influence: Required assistance in the writing of html and what specific commands did
+- Validation: Ensured that the page provided what was requested and made sure links worked
+- PR: #66
