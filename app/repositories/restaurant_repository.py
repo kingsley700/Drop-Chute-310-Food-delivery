@@ -96,8 +96,9 @@ def add_restaurant_items(restaurant_id: int, item: dict):
 
 
 
-def update_restaurant_item(restaurant_id: int, item_name: str, new_name: str | None = None, price: float | None = None, description: str | None = None):
-    """Updates a menu item's name, price, or description."""
+
+def update_restaurant_item(restaurant_id: int, item_name: str, new_name: str | None = None, price: float | None = None, description: str | None = None, available: bool | None = None):
+    """Updates a menu item's name, price, description, or availability."""
     restaurants = _read_data()
 
     for restaurant in restaurants:
@@ -110,11 +111,14 @@ def update_restaurant_item(restaurant_id: int, item_name: str, new_name: str | N
                         item["price"] = price
                     if description is not None:
                         item["description"] = description
+                    if available is not None:
+                        item["available"] = available
 
                     _write_data(restaurants)
                     return item
 
     return None
+
 
 
 

@@ -4,6 +4,7 @@ class RestaurantItem(BaseModel):
     name: str
     price: float
     description: str | None = None
+    available: bool = True
 
 class Restaurant(BaseModel):
     id: int
