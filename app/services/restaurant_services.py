@@ -40,9 +40,9 @@ def add_restaurant_items(restaurant_id: int, item: RestaurantItem):
     return restaurant_repository.add_restaurant_items(restaurant_id, item.model_dump())
 
 
-def update_restaurant_item(restaurant_id: int, item_name: str, new_name: str | None = None, price: float | None = None, description: str | None = None):
-    """Updates a menu item's name, price, or description."""
-    return restaurant_repository.update_restaurant_item(restaurant_id, item_name, new_name, price, description)
+def update_restaurant_item(restaurant_id: int, item_name: str, new_name: str | None = None, price: float | None = None, description: str | None = None, available: bool | None = None):
+    """Updates a menu item's name, price, description, or availability."""
+    return restaurant_repository.update_restaurant_item(restaurant_id, item_name, new_name, price, description, available)
 
 
 def delete_restaurant_item(restaurant_id: int, item_name: str):

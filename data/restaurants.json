@@ -6,119 +6,148 @@
     "items": [
       {
         "name": "Can Pop",
-        "price": 2.25
+        "price": 2.25,
+        "available": true
       },
       {
         "name": "Juice",
-        "price": 3.29
+        "price": 3.29,
+        "available": true
       },
       {
         "name": "2% Milk",
-        "price": 3.29
+        "price": 3.29,
+        "available": true
       },
       {
         "name": "Bottled Water",
-        "price": 2.39
+        "price": 2.39,
+        "available": true
       },
       {
         "name": "Bottled Vitamin Water",
-        "price": 3.29
+        "price": 3.29,
+        "available": true
       },
       {
         "name": "Xmtx Yoguart Flav Tea",
-        "price": 3.29
+        "price": 3.29,
+        "available": true
       },
       {
         "name": "Shirley Temple Drink",
-        "price": 5.5
+        "price": 5.5,
+        "available": true
       },
       {
         "name": "Spring Roll",
-        "price": 2.5
+        "price": 2.5,
+        "available": true
       },
       {
         "name": "Pan Fried Pot Sticker",
-        "price": 13.95
+        "price": 13.95,
+        "available": true
       },
       {
         "name": "Deep Fried Wonton With Sweet & Sour Sauce",
-        "price": 13.95
+        "price": 13.95,
+        "available": true
       },
       {
         "name": "Deep Fried Sesame Ball",
-        "price": 7.99
+        "price": 7.99,
+        "available": true
       },
       {
         "name": "Spicy Wonton In Chili Oil",
-        "price": 15.95
+        "price": 15.95,
+        "available": true
       },
       {
         "name": "French Fries",
-        "price": 5.5
+        "price": 5.5,
+        "available": true
       },
       {
         "name": "Deep Fried Tofu With Sweet & Spicy Sauce",
-        "price": 13.95
+        "price": 13.95,
+        "available": true
       },
       {
         "name": "Deep Fried Tofu With Chili Pepper Salt",
-        "price": 13.95
+        "price": 13.95,
+        "available": true
       },
       {
         "name": "Wonton Soup",
-        "price": 10.95
+        "price": 10.95,
+        "available": true
       },
       {
         "name": "Wor Wonton Soup",
-        "price": 13.95
+        "price": 13.95,
+        "available": true
       },
       {
         "name": "Hot & Sour Soup",
-        "price": 11.95
+        "price": 11.95,
+        "available": true
       },
       {
         "name": "Minced Chicken Creamy Corn Soup",
-        "price": 11.95
+        "price": 11.95,
+        "available": true
       },
       {
         "name": "Tung Yam Kung",
-        "price": 12.95
+        "price": 12.95,
+        "available": true
       },
       {
         "name": "Chicken & Tomatoe With Egg Swirl Soup",
-        "price": 11.95
+        "price": 11.95,
+        "available": true
       },
       {
         "name": "Seaweed With Egg Swirl Soup",
-        "price": 11.95
+        "price": 11.95,
+        "available": true
       },
       {
         "name": "Wonton With Noodle In Soup",
-        "price": 14.95
+        "price": 14.95,
+        "available": true
       },
       {
         "name": "Wor Wonton With Noodle In Soup",
-        "price": 17.95
+        "price": 17.95,
+        "available": true
       },
       {
         "name": "Chicken With Rice Noodle In Soup",
-        "price": 14.95
+        "price": 14.95,
+        "available": true
       },
       {
         "name": "Beef With Rice Noodle In Soup",
-        "price": 15.95
+        "price": 15.95,
+        "available": true
       },
       {
         "name": "Chicken With Udon Noodle In Soup",
-        "price": 15.95
+        "price": 15.95,
+        "available": true
       },
       {
         "name": "Beef With Udon Noodle In Soup",
-        "price": 16.95
+        "price": 16.95,
+        "available": true
       },
       {
         "name": "Tung Yam Kung Rice Vermicelli Soup",
-        "price": 16.95
+        "price": 16.95,
+        "available": true
       }
     ]
   },
@@ -130,575 +159,697 @@
       {
         "name": "Appie Platter",
         "price": 30.0,
-        "description": "Spring Roll (1) | Salad Rolls (2) | Veggie Egg Rolls (2) | Coconut Prawns (4) | Golden Wontons (5) | Chicken Wings (4)"
+        "description": "Spring Roll (1) | Salad Rolls (2) | Veggie Egg Rolls (2) | Coconut Prawns (4) | Golden Wontons (5) | Chicken Wings (4)",
+        "available": true
       },
       {
         "name": "Fresh Salad Rolls • Goi Cuon",
         "price": 11.0,
-        "description": "Cold rolls with vermicelli, cucumber, beansprouts & lettuce, wrapped inside rice paper with steamed prawn & pork. Served with peanut sauce"
+        "description": "Cold rolls with vermicelli, cucumber, beansprouts & lettuce, wrapped inside rice paper with steamed prawn & pork. Served with peanut sauce",
+        "available": true
       },
       {
         "name": "BBQ Salad Rolls • Goi Cuon Thit Nuong",
         "price": 12.0,
-        "description": "Cold rolls served with grilled meats. Choices: Beef | Pork | Chicken | Sweet Pork | Crispy Tofu"
+        "description": "Cold rolls served with grilled meats. Choices: Beef | Pork | Chicken | Sweet Pork | Crispy Tofu",
+        "available": true
       },
       {
         "name": "Crispy Spring Rolls • Cha Gio",
         "price": 11.0,
-        "description": "Minced veggies with pork & prawn wrapped in rice paper, fried & served with fish sauce"
+        "description": "Minced veggies with pork & prawn wrapped in rice paper, fried & served with fish sauce",
+        "available": true
       },
       {
         "name": "Veggie Egg Rolls • Cha Gio Chay",
         "price": 10.0,
-        "description": "Mixed veggies wrapped in crispy egg wraps & fried golden, served with sweet chili sauce"
+        "description": "Mixed veggies wrapped in crispy egg wraps & fried golden, served with sweet chili sauce",
+        "available": true
       },
       {
         "name": "House Fried Chicken • Ga Chien Uop Sa",
         "price": 12.0,
-        "description": "Lightly breaded sliced chicken breast tossed in house seasoning & fried, served with fish sauce"
+        "description": "Lightly breaded sliced chicken breast tossed in house seasoning & fried, served with fish sauce",
+        "available": true
       },
       {
         "name": "Coconut Prawns • Tom Chien Dua",
         "price": 15.0,
-        "description": "Lightly battered prawns coated in coconut flakes & fried, served with sweet chili sauce"
+        "description": "Lightly battered prawns coated in coconut flakes & fried, served with sweet chili sauce",
+        "available": true
       },
       {
         "name": "Golden Wontons • Hoanh Thanh Chien",
         "price": 11.0,
-        "description": "Hand wrapped seasoned prawn & pork wontons, fried crispy, served with sweet chili sauce"
+        "description": "Hand wrapped seasoned prawn & pork wontons, fried crispy, served with sweet chili sauce",
+        "available": true
       },
       {
         "name": "Sweet Chili Chicken • Ga Chien Ngot",
         "price": 13.0,
-        "description": "Fried chicken bites, bellpeppers & onions tossed in sweet chili. Topped with sesame seeds"
+        "description": "Fried chicken bites, bellpeppers & onions tossed in sweet chili. Topped with sesame seeds",
+        "available": true
       },
       {
         "name": "Shrimp Skewers • Tom Lui Nuong",
         "price": 13.0,
-        "description": "Seasoned shrimp skewered & grilled, served with creamy sesame sauce"
+        "description": "Seasoned shrimp skewered & grilled, served with creamy sesame sauce",
+        "available": true
       },
       {
         "name": "Pork Dry Ribs • Suon Chien Gion",
         "price": 13.0,
-        "description": "Lightly seasoned with salt & pepper, fried & served with sweet chili sauce"
+        "description": "Lightly seasoned with salt & pepper, fried & served with sweet chili sauce",
+        "available": true
       },
       {
         "name": "Calamari • Muc Chien Uop Sa",
         "price": 14.0,
-        "description": "Lightly breaded squid tossed in house seasoning & served with fish sauce"
+        "description": "Lightly breaded squid tossed in house seasoning & served with fish sauce",
+        "available": true
       },
       {
         "name": "Chicken Wings • Canh Ga Chien",
         "price": 15.0,
-        "description": "Choices: Original | Dry Sriracha | Sticky Pho | Plain"
+        "description": "Choices: Original | Dry Sriracha | Sticky Pho | Plain",
+        "available": true
       },
       {
         "name": "Green Onion Cake • Banh Hanh Chien",
         "price": 7.0,
-        "description": "Savory flat bread pastry with green onions & garlic chili for dipping. Choice of: Crispy | Panfried"
+        "description": "Savory flat bread pastry with green onions & garlic chili for dipping. Choice of: Crispy | Panfried",
+        "available": true
       },
       {
         "name": "Cup Wonton Soup • Hoanh Thanh",
-        "price": 5.5
+        "price": 5.5,
+        "available": true
       },
       {
         "name": "Crispy Dumplings",
         "price": 11.0,
-        "description": "Deep-fried dumplings filled with savory chicken and veggies. Served with sesame soy sauce"
+        "description": "Deep-fried dumplings filled with savory chicken and veggies. Served with sesame soy sauce",
+        "available": true
       },
       {
         "name": "Lettuce Wraps • Xa Lach Dac Biet",
         "price": 12.0,
-        "description": "Bell peppers, onions, chicken, crispy egg noodles, sesame seeds, cilantro & hoisin drizzle"
+        "description": "Bell peppers, onions, chicken, crispy egg noodles, sesame seeds, cilantro & hoisin drizzle",
+        "available": true
       },
       {
         "name": "Special House Salad • Xa Lach Dac Biet",
         "price": 12.0,
-        "description": "Lettuce, beansprouts, cucumber & pickled carrots served with fish sauce. Choices: Chicken | Beef | Prawns | Tofu"
+        "description": "Lettuce, beansprouts, cucumber & pickled carrots served with fish sauce. Choices: Chicken | Beef | Prawns | Tofu",
+        "available": true
       },
       {
         "name": "Cucumber Salad • Goi Dua Leo",
         "price": 12.0,
-        "description": "Julienned cucumber, diced red bell peppers & grilled marinated pork"
+        "description": "Julienned cucumber, diced red bell peppers & grilled marinated pork",
+        "available": true
       },
       {
         "name": "Grilled Porkchop • Com Suon Nuong",
         "price": 21.0,
-        "description": "Vietnamese style grilled pork chop served with Jasmine rice, fried egg & side broth"
+        "description": "Vietnamese style grilled pork chop served with Jasmine rice, fried egg & side broth",
+        "available": true
       },
       {
         "name": "Grilled Short Ribs • Com Bo Nuong",
         "price": 23.0,
-        "description": "Tender marinated beef short ribs served with Jasmine rice, fried egg & side broth"
+        "description": "Tender marinated beef short ribs served with Jasmine rice, fried egg & side broth",
+        "available": true
       },
       {
         "name": "Saigon Stirfry • Mi Xao Thuong Hai",
         "price": 18.0,
-        "description": "Thick wheat flour noodles stir fried with veggies. Choice of: Chicken | Beef | Tofu | Prawns | Seafood"
+        "description": "Thick wheat flour noodles stir fried with veggies. Choice of: Chicken | Beef | Tofu | Prawns | Seafood",
+        "available": true
       },
       {
         "name": "Chili Chicken Bowl • Ga Chien Ngot",
         "price": 17.0,
-        "description": "Bellpeppers, onions & sweet chili chicken served on rice with sesame seeds & rice paper crisps"
+        "description": "Bellpeppers, onions & sweet chili chicken served on rice with sesame seeds & rice paper crisps",
+        "available": true
       },
       {
         "name": "Seafood • Do Bien",
         "price": 16.5,
-        "description": "Chicken broth soup served with mixed veggies. Choice of: Egg Noodles | Rice Noodles"
+        "description": "Chicken broth soup served with mixed veggies. Choice of: Egg Noodles | Rice Noodles",
+        "available": true
       },
       {
         "name": "Prawn Soup • Tom",
         "price": 16.5,
-        "description": "Chicken broth soup served with mixed veggies. Choice of: Egg Noodles | Rice Noodles"
+        "description": "Chicken broth soup served with mixed veggies. Choice of: Egg Noodles | Rice Noodles",
+        "available": true
       },
       {
         "name": "Wonton Soup • Hoanh Thanh",
         "price": 15.5,
-        "description": "Chicken broth soup served with mixed veggies. Choice of: Egg Noodles | Rice Noodles"
+        "description": "Chicken broth soup served with mixed veggies. Choice of: Egg Noodles | Rice Noodles",
+        "available": true
       },
       {
         "name": "Chicken Soup • Ga",
         "price": 15.5,
-        "description": "Chicken broth soup served with mixed veggies. Choice of: Egg Noodles | Rice Noodles"
+        "description": "Chicken broth soup served with mixed veggies. Choice of: Egg Noodles | Rice Noodles",
+        "available": true
       },
       {
         "name": "Tofu Soup • Du Phu",
         "price": 15.5,
-        "description": "Chicken broth soup served with mixed veggies. Choice of: Egg Noodles | Rice Noodles"
+        "description": "Chicken broth soup served with mixed veggies. Choice of: Egg Noodles | Rice Noodles",
+        "available": true
       },
       {
         "name": "Veggie Soup • Cai",
         "price": 15.5,
-        "description": "Chicken broth soup served with mixed veggies. Choice of: Egg Noodles | Rice Noodles"
+        "description": "Chicken broth soup served with mixed veggies. Choice of: Egg Noodles | Rice Noodles",
+        "available": true
       },
       {
         "name": "Brisket Beef Stew • Bo Kho",
         "price": 17.5,
-        "description": "Vietnamese style spicy & flavourful brisket stew with spices and carrots. Served with rice noodles"
+        "description": "Vietnamese style spicy & flavourful brisket stew with spices and carrots. Served with rice noodles",
+        "available": true
       },
       {
         "name": "Spicy Hue Soup • Bun Bo Hue",
         "price": 17.5,
-        "description": "Spicy soup with chilies, lemon grass & spices. Served with thick vermicelli noodles, brisket, beef balls, fish cake, steamed pork patty & cabbage"
+        "description": "Spicy soup with chilies, lemon grass & spices. Served with thick vermicelli noodles, brisket, beef balls, fish cake, steamed pork patty & cabbage",
+        "available": true
       },
       {
         "name": "Curry Chicken Soup • Bun Ca Ri Ga",
         "price": 17.5,
-        "description": "Coconut based chicken stew served with thin vermicelli noodles"
+        "description": "Coconut based chicken stew served with thin vermicelli noodles",
+        "available": true
       },
       {
         "name": "Satay Soup • Hu Tieu Sa Te",
         "price": 17.5,
-        "description": "Satay sauce simmered with tomatoes, served with rice noodles, sliced prawns & choice of: Prawns | Seafood | Chicken | Beef | Tofu"
+        "description": "Satay sauce simmered with tomatoes, served with rice noodles, sliced prawns & choice of: Prawns | Seafood | Chicken | Beef | Tofu",
+        "available": true
       },
       {
         "name": "Hot & Sour Pho • Pho Chua Cay",
         "price": 17.5,
-        "description": "Tom Yum pho served with rice noodles, rare beef & prawns"
+        "description": "Tom Yum pho served with rice noodles, rare beef & prawns",
+        "available": true
       },
       {
         "name": "Saigon Chicken Noodle • Banh Canh Ga",
         "price": 17.0,
-        "description": "Light chicken broth served with large thick wheat noodles. Choice of: Chicken Thigh | Chicken Breast"
+        "description": "Light chicken broth served with large thick wheat noodles. Choice of: Chicken Thigh | Chicken Breast",
+        "available": true
       },
       {
         "name": "Glass Noodle Soup • Mien Ga",
         "price": 17.0,
-        "description": "Light chicken broth served with vermicelli glass noodles. Choice of: Chicken Thigh | Chicken Breast"
+        "description": "Light chicken broth served with vermicelli glass noodles. Choice of: Chicken Thigh | Chicken Breast",
+        "available": true
       },
       {
         "name": "Wor Wonton • Hoanh Thanh Thap Cam",
         "price": 17.5,
-        "description": "Wontons with sliced prawn & pork, served with mixed veggies"
+        "description": "Wontons with sliced prawn & pork, served with mixed veggies",
+        "available": true
       },
       {
         "name": "Laksa",
         "price": 21.0,
-        "description": "Rich & spicy seafood based curry soup with thick vermicelli noodles, veggies, chicken, prawns, sprouts, tofu & egg"
+        "description": "Rich & spicy seafood based curry soup with thick vermicelli noodles, veggies, chicken, prawns, sprouts, tofu & egg",
+        "available": true
       },
       {
         "name": "Pho - Special Beef • Dac Biet",
         "price": 16.5,
-        "description": "Vietnamese beef broth soup slow cooked with rice noodles"
+        "description": "Vietnamese beef broth soup slow cooked with rice noodles",
+        "available": true
       },
       {
         "name": "Pho - Seafood • Do Bien",
         "price": 16.5,
-        "description": "Rice noodle pho with seafood"
+        "description": "Rice noodle pho with seafood",
+        "available": true
       },
       {
         "name": "Pho - Prawn • Tom",
         "price": 16.5,
-        "description": "Rice noodle pho with prawns"
+        "description": "Rice noodle pho with prawns",
+        "available": true
       },
       {
         "name": "Pho - Medium Rare Beef • Tai",
-        "price": 15.5
+        "price": 15.5,
+        "available": true
       },
       {
         "name": "Pho - Brisket • Nam",
-        "price": 15.5
+        "price": 15.5,
+        "available": true
       },
       {
         "name": "Pho - Beef Ball • Bo Vien",
-        "price": 15.5
+        "price": 15.5,
+        "available": true
       },
       {
         "name": "Pho - Rare Beef & Beef Ball • Tai Bo Vien",
-        "price": 15.5
+        "price": 15.5,
+        "available": true
       },
       {
         "name": "Pho - Brisket & Beef Ball • Nam Bo Vien",
-        "price": 15.5
+        "price": 15.5,
+        "available": true
       },
       {
         "name": "Pho - Rare Beef & Brisket • Tai Nam",
-        "price": 15.5
+        "price": 15.5,
+        "available": true
       },
       {
         "name": "Pho - Chicken Breast • Uc Ga",
-        "price": 15.5
+        "price": 15.5,
+        "available": true
       },
       {
         "name": "Pho - Dark Chicken • Dui Ga",
-        "price": 15.5
+        "price": 15.5,
+        "available": true
       },
       {
         "name": "Pho - Veggie • Cai",
-        "price": 15.5
+        "price": 15.5,
+        "available": true
       },
       {
         "name": "Pho - Tofu • Du Phu",
-        "price": 15.5
+        "price": 15.5,
+        "available": true
       },
       {
         "name": "Pho - Tofu & Veggie • Dua Phu Cai",
-        "price": 15.5
+        "price": 15.5,
+        "available": true
       },
       {
         "name": "Spicy Lemongrass Pho • Pho Bo Hue",
         "price": 0.5,
-        "description": "Add spicy lemongrass broth to any pho"
+        "description": "Add spicy lemongrass broth to any pho",
+        "available": true
       },
       {
         "name": "Deluxe Bowl • Thap Cam",
         "price": 21.0,
-        "description": "Prawn Skewer, Beef, Chicken & Pork"
+        "description": "Prawn Skewer, Beef, Chicken & Pork",
+        "available": true
       },
       {
         "name": "4 Color Combo • Bon Mau",
         "price": 21.0,
-        "description": "Spring Roll, Prawn Skewer, BBQ Pork & Sweet Pork"
+        "description": "Spring Roll, Prawn Skewer, BBQ Pork & Sweet Pork",
+        "available": true
       },
       {
         "name": "3 Color Combo • Ba Mau",
         "price": 19.0,
-        "description": "Spring Roll, BBQ Pork & Sweet Pork"
+        "description": "Spring Roll, BBQ Pork & Sweet Pork",
+        "available": true
       },
       {
         "name": "2 Color Combo • Hai Mau",
         "price": 18.5,
-        "description": "Spring Roll & choice of: Beef | Chicken | Tofu | Pork | Sweet Pork"
+        "description": "Spring Roll & choice of: Beef | Chicken | Tofu | Pork | Sweet Pork",
+        "available": true
       },
       {
         "name": "Bamboo Bowl • Tom Bo Heo",
         "price": 18.0,
-        "description": "Grilled Prawn, Beef & Pork"
+        "description": "Grilled Prawn, Beef & Pork",
+        "available": true
       },
       {
         "name": "BBQ Bowl • Thit Nuong",
         "price": 17.5,
-        "description": "Choices: Beef | Chicken | Tofu | Pork | Sweet Pork"
+        "description": "Choices: Beef | Chicken | Tofu | Pork | Sweet Pork",
+        "available": true
       },
       {
         "name": "BBQ Prawns Bowl • Tom Nuong",
-        "price": 17.5
+        "price": 17.5,
+        "available": true
       },
       {
         "name": "Spring Roll Bowl • Cha Gio",
-        "price": 17.5
+        "price": 17.5,
+        "available": true
       },
       {
         "name": "Veggie Egg Roll Bowl • Cha Gio Chay",
         "price": 16.5,
-        "description": "Add Crispy Fried Tofu"
+        "description": "Add Crispy Fried Tofu",
+        "available": true
       },
       {
         "name": "Lemongrass Prawns • Tom Xao Sa Ot",
-        "price": 18.0
+        "price": 18.0,
+        "available": true
       },
       {
         "name": "Lemongrass Chicken • Ga Xao Sa Ot",
-        "price": 17.5
+        "price": 17.5,
+        "available": true
       },
       {
         "name": "Lemongrass Beef • Bo Xao Sa Ot",
-        "price": 17.5
+        "price": 17.5,
+        "available": true
       },
       {
         "name": "Lemongrass Tofu • Du Phu Xao Sa Ot",
-        "price": 16.5
+        "price": 16.5,
+        "available": true
       },
       {
         "name": "Lemongrass Veggies • Cai Xao Sa Ot",
-        "price": 16.5
+        "price": 16.5,
+        "available": true
       },
       {
         "name": "Seafood Stir Fry • Do Bien Xao Cai",
-        "price": 18.0
+        "price": 18.0,
+        "available": true
       },
       {
         "name": "Prawn Stir Fry • Tom Xao Cai",
-        "price": 18.0
+        "price": 18.0,
+        "available": true
       },
       {
         "name": "Chicken Stir Fry • Ga Xao Cai",
-        "price": 17.5
+        "price": 17.5,
+        "available": true
       },
       {
         "name": "Beef Stir Fry • Bo Xao Cai",
-        "price": 17.5
+        "price": 17.5,
+        "available": true
       },
       {
         "name": "Tofu Stir Fry • Du Phu Xao Cai",
-        "price": 16.5
+        "price": 16.5,
+        "available": true
       },
       {
         "name": "Veggie Stir Fry • Cai Xao",
-        "price": 16.5
+        "price": 16.5,
+        "available": true
       },
       {
         "name": "Seafood Curry Stir Fry • Do Bien Xao Lan",
-        "price": 18.0
+        "price": 18.0,
+        "available": true
       },
       {
         "name": "Prawn Curry Stir Fry • Tom Xao Lan",
-        "price": 18.0
+        "price": 18.0,
+        "available": true
       },
       {
         "name": "Chicken Curry Stir Fry • Ga Xao Lan",
-        "price": 17.5
+        "price": 17.5,
+        "available": true
       },
       {
         "name": "Beef Curry Stir Fry • Bo Xao Lan",
-        "price": 17.5
+        "price": 17.5,
+        "available": true
       },
       {
         "name": "Tofu Curry Stir Fry • Du Phu Xao Lan",
-        "price": 16.5
+        "price": 16.5,
+        "available": true
       },
       {
         "name": "Vegetable Curry Stir Fry • Cai Xao Lan",
-        "price": 16.5
+        "price": 16.5,
+        "available": true
       },
       {
         "name": "Side Sprouts / Garnish",
-        "price": 0.75
+        "price": 0.75,
+        "available": true
       },
       {
         "name": "Rice/Noodle Bowl",
-        "price": 3.5
+        "price": 3.5,
+        "available": true
       },
       {
         "name": "Side Steamed Veggies",
-        "price": 4.5
+        "price": 4.5,
+        "available": true
       },
       {
         "name": "Side Sauce",
-        "price": 1.0
+        "price": 1.0,
+        "available": true
       },
       {
         "name": "Strawberry Basil Iced Tea",
         "price": 4.5,
-        "description": "Muddled strawberries, basil, lemon & iced tea"
+        "description": "Muddled strawberries, basil, lemon & iced tea",
+        "available": true
       },
       {
         "name": "Mix Berry Punch",
         "price": 4.5,
-        "description": "Blueberry, blackberry, raspberry, orange juice & soda"
+        "description": "Blueberry, blackberry, raspberry, orange juice & soda",
+        "available": true
       },
       {
         "name": "Vietnamese Soda",
         "price": 3.5,
-        "description": "Choice of: Lychee | Passionfruit | Raspberry | Strawberry | Mango | Pineapple | Grapefruit | Kiwi"
+        "description": "Choice of: Lychee | Passionfruit | Raspberry | Strawberry | Mango | Pineapple | Grapefruit | Kiwi",
+        "available": true
       },
       {
         "name": "Iced Green Tea",
         "price": 3.5,
-        "description": "Choice of: Lychee | Passionfruit | Raspberry | Strawberry | Mango | Pineapple | Grapefruit | Kiwi"
+        "description": "Choice of: Lychee | Passionfruit | Raspberry | Strawberry | Mango | Pineapple | Grapefruit | Kiwi",
+        "available": true
       },
       {
         "name": "Traditional Vietnamese Coffee",
         "price": 5.5,
-        "description": "Iced or hot"
+        "description": "Iced or hot",
+        "available": true
       },
       {
         "name": "Smoothies",
         "price": 5.5,
-        "description": "Choice of: Lychee | Passionfruit | Raspberry | Strawberry | Mango | Pineapple | Grapefruit | Kiwi"
+        "description": "Choice of: Lychee | Passionfruit | Raspberry | Strawberry | Mango | Pineapple | Grapefruit | Kiwi",
+        "available": true
       },
       {
         "name": "Soft Drinks",
         "price": 3.5,
-        "description": "Coke | Diet Coke | 7UP | Ginger Ale | Iced Tea | Root Beer"
+        "description": "Coke | Diet Coke | 7UP | Ginger Ale | Iced Tea | Root Beer",
+        "available": true
       },
       {
         "name": "Juice",
         "price": 3.25,
-        "description": "Apple | Clamato | Cranberry | Mango | Orange | Pineapple"
+        "description": "Apple | Clamato | Cranberry | Mango | Orange | Pineapple",
+        "available": true
       },
       {
         "name": "Shirley Temple",
         "price": 3.5,
-        "description": "7UP, Orange Juice & Grenadine"
+        "description": "7UP, Orange Juice & Grenadine",
+        "available": true
       },
       {
         "name": "Bottled Water",
-        "price": 2.5
+        "price": 2.5,
+        "available": true
       },
       {
         "name": "Tea Pot",
         "price": 3.0,
-        "description": "Ask server for tea selection"
+        "description": "Ask server for tea selection",
+        "available": true
       },
       {
         "name": "Gewurztraminer",
         "price": 40.0,
-        "description": "White wine"
+        "description": "White wine",
+        "available": true
       },
       {
         "name": "Dry Riesling",
         "price": 40.0,
-        "description": "White wine"
+        "description": "White wine",
+        "available": true
       },
       {
         "name": "Pinot Noir",
         "price": 50.0,
-        "description": "Red wine"
+        "description": "Red wine",
+        "available": true
       },
       {
         "name": "Chardonnay",
         "price": 40.0,
-        "description": "White wine"
+        "description": "White wine",
+        "available": true
       },
       {
         "name": "Pinot Grigio",
         "price": 41.0,
-        "description": "White wine"
+        "description": "White wine",
+        "available": true
       },
       {
         "name": "Shiraz",
         "price": 41.0,
-        "description": "Red wine"
+        "description": "Red wine",
+        "available": true
       },
       {
         "name": "Hakutsuru Sake",
         "price": 15.0,
-        "description": "Sake"
+        "description": "Sake",
+        "available": true
       },
       {
         "name": "Plum Wine",
         "price": 6.0,
-        "description": "Plum wine"
+        "description": "Plum wine",
+        "available": true
       },
       {
         "name": "Strawberry Basil Smash",
         "price": 9.0,
-        "description": "Empress Gin, strawberry, basil, citrus & soda"
+        "description": "Empress Gin, strawberry, basil, citrus & soda",
+        "available": true
       },
       {
         "name": "Pineapple Passion",
         "price": 9.0,
-        "description": "Empress Gin, passionfruit, pineapple & soda"
+        "description": "Empress Gin, passionfruit, pineapple & soda",
+        "available": true
       },
       {
         "name": "Bam-Boffee",
         "price": 9.0,
-        "description": "Kahlua, coffee liqueur & Vietnamese espresso coffee"
+        "description": "Kahlua, coffee liqueur & Vietnamese espresso coffee",
+        "available": true
       },
       {
         "name": "Citrus Fizz",
         "price": 9.0,
-        "description": "Gin, basil, kumquat, citrus & soda"
+        "description": "Gin, basil, kumquat, citrus & soda",
+        "available": true
       },
       {
         "name": "Strawberry Dream",
         "price": 9.0,
-        "description": "Vodka, strawberry, condensed milk, lime & soda"
+        "description": "Vodka, strawberry, condensed milk, lime & soda",
+        "available": true
       },
       {
         "name": "Saigon Caesar",
         "price": 9.0,
-        "description": "Sake, Clamato, Sriracha & Worcestershire"
+        "description": "Sake, Clamato, Sriracha & Worcestershire",
+        "available": true
       },
       {
         "name": "Tropical Blossom",
         "price": 9.0,
-        "description": "Rum, Pama Liqueur, lychee, lime & pineapple juice"
+        "description": "Rum, Pama Liqueur, lychee, lime & pineapple juice",
+        "available": true
       },
       {
         "name": "Expresso Martini",
         "price": 10.0,
-        "description": "Vodka, Baileys & Vietnamese coffee"
+        "description": "Vodka, Baileys & Vietnamese coffee",
+        "available": true
       },
       {
         "name": "Pink Velvet",
         "price": 10.0,
-        "description": "Vodka, raspberry syrup, Yakult & citrus"
+        "description": "Vodka, raspberry syrup, Yakult & citrus",
+        "available": true
       },
       {
         "name": "Sake Plum-tini",
         "price": 10.0,
-        "description": "Sake, plum wine, triple sec & lime"
+        "description": "Sake, plum wine, triple sec & lime",
+        "available": true
       },
       {
         "name": "Lycheetini",
         "price": 10.0,
-        "description": "Vodka, Soho & lychee juice"
+        "description": "Vodka, Soho & lychee juice",
+        "available": true
       },
       {
         "name": "Off Shore Bottles",
         "price": 8.0,
-        "description": "Asahi | Corona | Lucky Buddha | Saigon | Sapporo | Tsingtao"
+        "description": "Asahi | Corona | Lucky Buddha | Saigon | Sapporo | Tsingtao",
+        "available": true
       },
       {
         "name": "Local Bottles",
         "price": 7.0,
-        "description": "Coors Lite | Budweiser"
+        "description": "Coors Lite | Budweiser",
+        "available": true
       },
       {
         "name": "BNA Brews",
-        "price": 8.0
+        "price": 8.0,
+        "available": true
       },
       {
         "name": "Mango Tango",
         "price": 10.0,
-        "description": "White wine, Empress Gin, mango syrup & soda"
+        "description": "White wine, Empress Gin, mango syrup & soda",
+        "available": true
       },
       {
         "name": "Mix Berry Sangria",
         "price": 10.0,
-        "description": "House red, rum, mixed berries & cranberry juice"
+        "description": "House red, rum, mixed berries & cranberry juice",
+        "available": true
       },
       {
         "name": "Pama Berry Sangria",
         "price": 10.0,
-        "description": "House red, Pama, mixed berries, orange juice & soda"
+        "description": "House red, Pama, mixed berries, orange juice & soda",
+        "available": true
       },
       {
         "name": "Sake Sunrise",
         "price": 10.0,
-        "description": "Sake, plum wine, orange juice, strawberries & soda"
+        "description": "Sake, plum wine, orange juice, strawberries & soda",
+        "available": true
       },
       {
         "name": "Strawberry Sparkler",
         "price": 10.0,
-        "description": "White wine, triple sec, strawberries & soda"
+        "description": "White wine, triple sec, strawberries & soda",
+        "available": true
       },
       {
         "name": "White Wine Tropics",
         "price": 10.0,
-        "description": "White wine, Soho, Sprite, raspberry & lychee syrup"
+        "description": "White wine, Soho, Sprite, raspberry & lychee syrup",
+        "available": true
       }
     ]
   },
@@ -709,7 +860,8 @@
       {
         "name": "string",
         "price": 0.0,
-        "description": "string"
+        "description": "string",
+        "available": true
       }
     ],
     "id": 3

@@ -30,9 +30,9 @@ def _next_id(carts):
 
 
 def get_cart_by_customer(customer_id: int):
-    """Returns a cart based on customer ID."""
+    """Returns the customer's active cart."""
     for cart in get_carts():
-        if cart.customer_id == customer_id:
+        if cart.customer_id == customer_id and cart.status == "active":
             return cart
     return None
 
@@ -55,3 +55,15 @@ def create_cart(customer_id: int):
     _write_data(records)
 
     return cart
+
+def update_cart(cart):
+    """Updates a cart."""
+    carts = _read_data()
+
+    for index, record in enumerate(carts):
+        if record["id"] == cart.id:
+            carts[index] = cart.model_dump()
+            _write_data(carts)
+            return cart
+
+    return None
