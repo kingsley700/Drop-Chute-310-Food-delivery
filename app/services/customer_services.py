@@ -18,3 +18,5 @@ def register_customer(data: CustomerCreate) -> CustomerResponse:
         delivery_address=data.delivery_address,
     )
     return CustomerResponse(**customer.model_dump())
+
+

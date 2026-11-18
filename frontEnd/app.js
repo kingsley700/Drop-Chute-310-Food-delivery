@@ -131,7 +131,7 @@ const createStatus = document.getElementById(
 );
 createForm.addEventListener("submit", async function (event) {
 
-    event.preventDefault
+    event.preventDefault();
 
     const name = document.getElementById(
         "new-restaurant-name"
