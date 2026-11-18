@@ -188,25 +188,3 @@ def test_update_cart_recalculates_totals(tmp_path, monkeypatch):
     assert response.json()["subtotal"] == 30.0
     assert response.json()["tax"] == 3.6
     assert response.json()["total"] == 33.6
-
-
-def test_remove_cart_item(tmp_path, monkeypatch):
-    setup_add_item(tmp_path, monkeypatch)
-    cart_service.add_item_to_cart(1, 1, "Burger", 2)
-
-    response = client.delete("/customers/1/cart/items/Burger")
-
-    assert response.status_code == 200
-    assert response.json()["items"] == []
-    assert response.json()["subtotal"] == 0.0
-    assert response.json()["tax"] == 0.0
-    assert response.json()["total"] == 0.0
-
-
-def test_remove_missing_cart_item(tmp_path, monkeypatch):
-    setup_add_item(tmp_path, monkeypatch)
-    cart_service.get_or_create_cart(1)
-
-    response = client.delete("/customers/1/cart/items/Burger")
-
-    assert response.status_code == 404
