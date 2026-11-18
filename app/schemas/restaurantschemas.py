@@ -2,7 +2,7 @@ from pydantic import BaseModel, Field
 
 class RestaurantItem(BaseModel):
     name: str
-    price: float
+    price: float = Field(ge=0)
     description: str | None = None
     available: bool = True
 
@@ -21,5 +21,5 @@ class RestaurantUpdate(BaseModel):
 #schema for updating a menu item
 class RestaurantItemUpdate(BaseModel):
     name: str | None = None
-    price: float | None = None
+    price: float | None = Field(default=None, ge=0)
     description: str | None = None
