@@ -182,3 +182,14 @@ def test_missing_required_field_returns_500(tmp_path):
         assert TestClient(app, raise_server_exceptions=False).get("/restaurants").status_code==500
     finally:
         repo.filep=original_path
+
+
+def test_negative_price_invalid(tmp_path):
+    make_file(tmp_path)
+    try:
+        response = client.patch("/restaurants/1/items/Can Pop", json={"price": -1.0})
+        assert response.status_code == 422
+        items = client.get("/restaurants").json()[0]["items"]
+        assert items[0]["price"] == 2.25
+    finally:
+        repo.filep = original_path
