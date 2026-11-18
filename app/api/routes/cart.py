@@ -66,3 +66,17 @@ def add_cart_item(customer_id: int, item: CartItemCreate):
 )
 def update_cart_item(customer_id: int, item_name: str, item: CartItemUpdate):
     return update_cart_item_quantity(customer_id, item_name, item.quantity)
+
+
+@router.delete(
+    "/customers/{customer_id}/cart/items/{item_name}",
+    response_model=Cart,
+    summary="Remove item from cart",
+    description="Removes an item from the customer's active cart.",
+    responses={
+        403: {"description": "Customer is deactivated"},
+        404: {"description": "Customer, cart, or item not found"}
+    }
+)
+def remove_cart_item_endpoint(customer_id: int, item_name: str):
+    return remove_cart_item(customer_id, item_name)
