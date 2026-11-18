@@ -135,3 +135,56 @@ def test_deactivated_customer_cannot_add_item(tmp_path, monkeypatch):
         cart_service.add_item_to_cart(1, 1, "Burger", 1)
 
     assert error.value.status_code == 403
+
+
+def test_update_cart_item_quantity(tmp_path, monkeypatch):
+    setup_add_item(tmp_path, monkeypatch)
+
+    cart_service.add_item_to_cart(1, 1, "Burger", 2)
+
+    response = client.patch("/customers/1/cart/items/Burger", json={
+        "quantity": 3
+    })
+
+    assert response.status_code == 200
+    assert response.json()["items"][0]["quantity"] == 3
+
+
+def test_update_missing_cart_item(tmp_path, monkeypatch):
+    setup_add_item(tmp_path, monkeypatch)
+
+    cart_service.get_or_create_cart(1)
+
+    response = client.patch("/customers/1/cart/items/Burger", json={
+        "quantity": 2
+    })
+
+    assert response.status_code == 404
+
+
+@pytest.mark.parametrize("quantity", [0, -1])
+def test_update_invalid_quantity(tmp_path, monkeypatch, quantity):
+    setup_add_item(tmp_path, monkeypatch)
+
+    cart_service.add_item_to_cart(1, 1, "Burger", 2)
+
+    response = client.patch("/customers/1/cart/items/Burger", json={
+        "quantity": quantity
+    })
+
+    assert response.status_code == 422
+
+
+def test_update_cart_recalculates_totals(tmp_path, monkeypatch):
+    setup_add_item(tmp_path, monkeypatch)
+
+    cart_service.add_item_to_cart(1, 1, "Burger", 2)
+
+    response = client.patch("/customers/1/cart/items/Burger", json={
+        "quantity": 3
+    })
+
+    assert response.status_code == 200
+    assert response.json()["subtotal"] == 30.0
+    assert response.json()["tax"] == 3.6
+    assert response.json()["total"] == 33.6
