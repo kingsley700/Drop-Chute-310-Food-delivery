@@ -76,3 +76,76 @@ def add_item_to_cart(customer_id: int, restaurant_id: int, item_name: str, quant
     ))
 
     return cart_repo.update_cart(cart)
+
+def update_cart_item_quantity(customer_id: int, item_name: str, quantity: int):
+    """Updates the quantity of an item in the customer's cart."""
+
+    customer = customer_repository.get_customer_by_id(customer_id)
+
+    if customer is None:
+        raise HTTPException(status_code=404, detail="Customer not found")
+
+    if not customer.is_active:
+        raise HTTPException(status_code=403, detail="Customer is deactivated")
+
+    if not isinstance(quantity, int) or isinstance(quantity, bool) or quantity <= 0:
+        raise HTTPException(status_code=422, detail="Quantity must be a positive integer")
+
+    cart = cart_repo.get_cart_by_customer(customer_id)
+
+    if cart is None:
+        raise HTTPException(status_code=404, detail="Cart not found")
+
+    item_found = False
+
+    for item in cart.items:
+        if item.name == item_name:
+            item.quantity = quantity
+            item_found = True
+            break
+
+    if not item_found:
+        raise HTTPException(status_code=404, detail="Cart item not found")
+
+    cart.subtotal = sum(item.price * item.quantity for item in cart.items)
+    cart.tax = round(cart.subtotal * 0.12, 2)
+    cart.total = round(cart.subtotal + cart.tax, 2)
+
+    return cart_repo.update_cart(cart)
+
+
+def update_cart_item_quantity(customer_id: int, item_name: str, quantity: int):
+    """Updates the quantity of an item in the customer's cart."""
+
+    customer = customer_repository.get_customer_by_id(customer_id)
+
+    if customer is None:
+        raise HTTPException(status_code=404, detail="Customer not found")
+
+    if not customer.is_active:
+        raise HTTPException(status_code=403, detail="Customer is deactivated")
+
+    if not isinstance(quantity, int) or isinstance(quantity, bool) or quantity <= 0:
+        raise HTTPException(status_code=422, detail="Quantity must be a positive integer")
+
+    cart = cart_repo.get_cart_by_customer(customer_id)
+
+    if cart is None:
+        raise HTTPException(status_code=404, detail="Cart not found")
+
+    item_found = False
+
+    for item in cart.items:
+        if item.name == item_name:
+            item.quantity = quantity
+            item_found = True
+            break
+
+    if not item_found:
+        raise HTTPException(status_code=404, detail="Cart item not found")
+
+    cart.subtotal = sum(item.price * item.quantity for item in cart.items)
+    cart.tax = round(cart.subtotal * 0.12, 2)
+    cart.total = round(cart.subtotal + cart.tax, 2)
+
+    return cart_repo.update_cart(cart)
