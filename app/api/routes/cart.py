@@ -52,3 +52,17 @@ def add_cart_item(customer_id: int, item: CartItemCreate):
         item.item_name,
         item.quantity
     )
+
+@router.patch(
+    "/customers/{customer_id}/cart/items/{item_name}",
+    response_model=Cart,
+    summary="Update cart item quantity",
+    description="Updates the quantity of an existing item in the customer's cart.",
+    responses={
+        403: {"description": "Customer is deactivated"},
+        404: {"description": "Customer, cart, or item not found"},
+        422: {"description": "Invalid quantity"}
+    }
+)
+def update_cart_item(customer_id: int, item_name: str, item: CartItemUpdate):
+    return update_cart_item_quantity(customer_id, item_name, item.quantity)

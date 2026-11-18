@@ -13,6 +13,11 @@ class CartItemCreate(BaseModel):
     quantity: int
 
 
+class CartItemUpdate(BaseModel):
+    """Request body for updating an item's quantity."""
+    quantity: int
+
+
 class CartItem(BaseModel):
     """An item inside a cart."""
     name: str
@@ -27,6 +32,9 @@ class Cart(BaseModel):
     status: str = "active"
     restaurant_id: int | None = None
     items: list[CartItem] = Field(default_factory=list)
+    subtotal: float = 0.0
+    tax: float = 0.0
+    total: float = 0.0
 
 
 class CartResponse(BaseModel):
@@ -36,3 +44,6 @@ class CartResponse(BaseModel):
     status: str
     restaurant_id: int | None = None
     items: list[CartItem] = Field(default_factory=list)
+    subtotal: float = 0.0
+    tax: float = 0.0
+    total: float = 0.0
