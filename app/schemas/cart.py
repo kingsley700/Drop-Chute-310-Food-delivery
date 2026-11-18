@@ -1,9 +1,23 @@
+from pydantic import BaseModel, Field
 
-from pydantic import BaseModel
 
 class CartCreate(BaseModel):
     """Request body for creating a cart."""
     customer_id: int
+
+
+class CartItemCreate(BaseModel):
+    """Request body for adding an item to a cart."""
+    restaurant_id: int
+    item_name: str
+    quantity: int
+
+
+class CartItem(BaseModel):
+    """An item inside a cart."""
+    name: str
+    price: float
+    quantity: int
 
 
 class Cart(BaseModel):
@@ -11,7 +25,8 @@ class Cart(BaseModel):
     id: int
     customer_id: int
     status: str = "active"
-    items: list = []
+    restaurant_id: int | None = None
+    items: list[CartItem] = Field(default_factory=list)
 
 
 class CartResponse(BaseModel):
@@ -19,4 +34,5 @@ class CartResponse(BaseModel):
     id: int
     customer_id: int
     status: str
-    items: list
+    restaurant_id: int | None = None
+    items: list[CartItem] = Field(default_factory=list)
