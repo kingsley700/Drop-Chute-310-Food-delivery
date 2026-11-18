@@ -210,3 +210,28 @@ def test_remove_missing_cart_item(tmp_path, monkeypatch):
     response = client.delete("/customers/1/cart/items/Burger")
 
     assert response.status_code == 404
+
+
+def test_clear_cart(tmp_path, monkeypatch):
+    setup_add_item(tmp_path, monkeypatch)
+
+    cart_service.add_item_to_cart(1, 1, "Burger", 2)
+    cart_service.add_item_to_cart(1, 1, "Pizza", 1)
+
+    response = client.delete("/customers/1/cart")
+
+    assert response.status_code == 200
+    assert response.json()["items"] == []
+    assert response.json()["status"] == "active"
+    assert response.json()["subtotal"] == 0.0
+    assert response.json()["tax"] == 0.0
+    assert response.json()["total"] == 0.0
+
+
+def test_deactivated_customer_cannot_clear_cart(tmp_path, monkeypatch):
+    setup_add_item(tmp_path, monkeypatch, active=False)
+
+    with pytest.raises(HTTPException) as error:
+        cart_service.clear_cart(1)
+
+    assert error.value.status_code == 403
