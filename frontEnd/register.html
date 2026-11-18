@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Drop Chute</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <main class="card">
+        <h1>Create your account</h1>
+
+        <form id="register-form" novalidate>
+            <div class="field">
+                <label for="name">Name</label>
+                <input id="name" name="name" type="text" autocomplete="name">
+                <p class="error" id="name-error" role="alert"></p>
+            </div>
+
+            <div class="field">
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" autocomplete="email">
+                <p class="error" id="email-error" role="alert"></p>
+            </div>
+
+            <div class="field">
+                <label for="password">Password</label>
+                <input id="password" name="password" type="password" autocomplete="new-password">
+                <p class="error" id="password-error" role="alert"></p>
+            </div>
+
+            <div class="field">
+                <label for="delivery_address">Delivery address</label>
+                <input id="delivery_address" name="delivery_address" type="text" autocomplete="street-address">
+                <p class="error" id="delivery_address-error" role="alert"></p>
+            </div>
+
+            <p class="error form-error" id="form-error" role="alert"></p>
+            <p class="success" id="form-success" role="status"></p>
+
+            <button type="submit" id="submit-button">Register</button>
+        </form>
+
+        <p class="alt">Already have an account? <a href="login.html">Sign in</a></p>
+    </main>
+
+    <script src="register.js"></script>
+</body>
+
+</html>

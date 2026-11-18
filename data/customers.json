@@ -1,1 +1,9 @@
-[]
+[
+  {
+    "id": 1,
+    "name": "Rayan",
+    "email": "rayansemail@gmail.com",
+    "hashed_password": "$2b$12$ej8YzUEGCEnycV/AFO9dFOGI/g2jctyBr8s5p3jbTaQpWiK.gzvDW",
+    "delivery_address": "755 academy"
+  }
+]
