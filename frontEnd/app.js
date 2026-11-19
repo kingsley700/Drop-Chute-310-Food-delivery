@@ -148,8 +148,10 @@ createForm.addEventListener("submit", async function (event) {
     }
 
     const newRestaurant = {
+        id: restaurants.length+1,
         name: name,
-        cuisine: cuisine
+        cuisine: cuisine,
+        items: []
     };
 
     createStatus.textContent = "Creating Restaurant...";
