@@ -1,35 +1,36 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Drop Chute - Customer</title>
+    <title>Drop Chute - Customer</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="customer.js" defer></script>
+    <script type="module" src="customer.js"></script>
 </head>
 
-<body>  
+<body>
     <header>
-        <h1>Customer Side</h1> <!--temp-->
+        <h1>Customer Side</h1>
     </header>
 
     <main>
         <nav>
-            <a href="index.html" class="nav-button">Landing page index</a> <!--This is a temp link that moves us from customer to index-->
+            <a href="index.html" class="nav-button">Landing page index</a><!--This is a temp link that moves us from customer to index-->
             <a href="restaurant.html" class="nav-button">Restaurant side</a> <!--This is a temp link that moves us from customer to restaurant-->
-            <a href="register.html" class="nav-button">Register</a> <!--This is a temp link that moves us from customer to register-->
         </nav>
 
-        <section id ="restaurant-view" aria-labelledby="restaurant-heading">
+        <section id="restaurant-view" aria-labelledby="restaurant-heading">
             <h2 id="restaurant-heading">Restaurants</h2>
+
             <p id="restaurant-status" role="status">
                 Restaurants will appear here.
             </p>
 
-            <ul id="restaurant-list"> </ul>
-        </section>    
-        
+            <ul id="restaurant-list"></ul>
+        </section>
+
         <section id="restaurant-details" hidden>
             <button id="back-button" type="button">
                 Back to restaurants
@@ -42,5 +43,31 @@
             <p id="menu-status" role="status"></p>
             <ul id="menu-list"></ul>
         </section>
+
+        <section id="cart-view">
+            <h2>Shopping Cart</h2>
+
+            <p id="cart-status" role="status">
+                Your cart will appear here.
+            </p>
+
+            <p id="cart-restaurant"></p>
+
+            <ul id="cart-items"></ul>
+
+            <div id="cart-totals" hidden>
+                <p id="cart-subtotal"></p>
+                <p id="cart-tax"></p>
+                <h3 id="cart-total"></h3>
+            </div>
+
+            <button id="refresh-cart-button" type="button">
+                Refresh Cart
+            </button>
+            <button id="clear-cart-button" type="button">
+                Clear Cart
+            </button>
+        </section>
     </main>
 </body>
+</html>

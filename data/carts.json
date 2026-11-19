@@ -1,1 +1,12 @@
-[]
+[
+  {
+    "id": 1,
+    "customer_id": 1,
+    "status": "active",
+    "restaurant_id": 1,
+    "items": [],
+    "subtotal": 0.0,
+    "tax": 0.0,
+    "total": 0.0
+  }
+]

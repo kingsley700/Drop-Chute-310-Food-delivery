@@ -9,14 +9,14 @@ router = APIRouter()
     "/customers/{customer_id}/cart",
     response_model=Cart,
     summary="Get customer's active cart",
-    description="Returns the customer's active shopping cart. Creates one if none exists.",
+    description="Returns the customer's active shopping cart and its contents.",
     responses={
         403: {"description": "Customer is deactivated"},
-        404: {"description": "Customer not found"}
+        404: {"description": "Customer or cart not found"}
     }
 )
 def get_customer_cart(customer_id: int):
-    return get_or_create_cart(customer_id)
+    return get_cart(customer_id)
 
 
 @router.post(
