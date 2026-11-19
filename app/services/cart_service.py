@@ -182,3 +182,26 @@ def remove_cart_item(customer_id: int, item_name: str):
     cart.total = round(cart.subtotal + cart.tax, 2)
 
     return cart_repo.update_cart(cart)
+
+def clear_cart(customer_id: int):
+    """Removes all items from the customer's active cart."""
+
+    customer = customer_repository.get_customer_by_id(customer_id)
+
+    if customer is None:
+        raise HTTPException(status_code=404, detail="Customer not found")
+
+    if not customer.is_active:
+        raise HTTPException(status_code=403, detail="Customer is deactivated")
+
+    cart = cart_repo.get_cart_by_customer(customer_id)
+
+    if cart is None:
+        raise HTTPException(status_code=404, detail="Cart not found")
+
+    cart.items = []
+    cart.subtotal = 0.0
+    cart.tax = 0.0
+    cart.total = 0.0
+
+    return cart_repo.update_cart(cart)
