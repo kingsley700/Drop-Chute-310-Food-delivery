@@ -3,7 +3,11 @@ import { loadCart, clearCart } from "./cart.js";
 const statusElement = document.getElementById("restaurant-status");
 const restaurantList = document.getElementById("restaurant-list");
 let restaurants = [];
-const customerId = 1; //TODO: Replace with actual customer ID when authentication is implemented
+const customerId = getCustomerId();
+if (customerId === null){
+    window.location.href = "login.html";
+}
+ //TODO: Replace with actual customer ID when authentication is implemented
 
 
 async function loadRestaurants() {
