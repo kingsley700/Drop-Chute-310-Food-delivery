@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In - Drop Chute</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <main class="card">
+        <h1>Sign in</h1>
+
+        <form id="login-form" novalidate>
+            <div class="field">
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" autocomplete="email">
+                <p class="error" id="email-error" role="alert"></p>
+            </div>
+
+            <div class="field">
+                <label for="password">Password</label>
+                <input id="password" name="password" type="password" autocomplete="current-password">
+                <p class="error" id="password-error" role="alert"></p>
+            </div>
+
+            <p class="error form-error" id="form-error" role="alert"></p>
+
+            <button type="submit" id="submit-button">Sign in</button>
+        </form>
+
+        <p class="alt">New here? <a href="register.html">Create an account</a></p>
+    </main>
+
+    <script src="api.js"></script>
+    <script src="login.js"></script>
+</body>
+
+</html>

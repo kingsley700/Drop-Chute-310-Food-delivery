@@ -88,3 +88,13 @@ Entry 9
 - Influence: Couldn't understand why certain points weren't being reached and why the tokens were failing to go through
 - Validation: Checked in browser using F12 and using network tools, alongside with setToken("abc123") in the terminal
 - PR: #73
+
+Entry 10
+- Student: Rayan Cooper
+- Artifact: frontEnd\login.js
+- Label: AI-Assisted
+- AI tool: Claude
+- Purpose: Wrote the login.js code
+- Influence: To write code required for login.html to run
+- Validation: Ensured page ran as expected
+- PR: #72
