@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from app.services.restaurant_services import *
 from app.schemas.restaurantschemas import *
 
@@ -30,7 +30,10 @@ def create_new_restaurant(restaurant: Restaurant):
         500: {"description": "The restaurant data file could not be written"}
     })
 def create_new_item(restaurant_id: int, item: RestaurantItem):
-    return add_restaurant_items(restaurant_id, item)
+    try:
+        return add_restaurant_items(restaurant_id, item)
+    except ValueError as error:
+        raise HTTPException(status_code=404, detail=str(error))
 
 
 @router.patch("/restaurants/{restaurant_id}",summary="Update a restaurant",
@@ -40,12 +43,17 @@ def create_new_item(restaurant_id: int, item: RestaurantItem):
         500: {"description": "The restaurant data file could not be written"}
     })
 def update_restaurant(restaurant_id: int, updates: RestaurantUpdate):
-    result = None
-    if updates.name is not None:
-        result = update_restaurant_name(restaurant_id, updates.name)
-    if updates.cuisine is not None:
-        result = update_restaurant_cuisine(restaurant_id, updates.cuisine)
-    return result
+    try:
+        restaurant = get_restaurant_by_id(restaurant_id)
+        if restaurant is None:
+            raise ValueError("Restaurant not found")
+        if updates.name is not None:
+            update_restaurant_name(restaurant_id, updates.name)
+        if updates.cuisine is not None:
+            update_restaurant_cuisine(restaurant_id, updates.cuisine)
+        return get_restaurant_by_id(restaurant_id)
+    except ValueError as error:
+        raise HTTPException(status_code=404, detail=str(error))
 
 
 @router.patch(
@@ -58,5 +66,8 @@ def update_restaurant(restaurant_id: int, updates: RestaurantUpdate):
     }
 )
 def update_item(restaurant_id: int,item_name: str,updates: RestaurantItemUpdate):
-    return update_restaurant_item(restaurant_id,item_name,new_name=updates.name,
+    try:    
+        return update_restaurant_item(restaurant_id,item_name,new_name=updates.name,
             price=updates.price,description=updates.description)
+    except ValueError as error:
+        raise HTTPException(status_code=404, detail=str(error))

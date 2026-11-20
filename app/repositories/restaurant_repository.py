@@ -93,6 +93,8 @@ def add_restaurant_items(restaurant_id: int, item: dict):
             restaurant["items"].append(item)
             _write_data(restaurants)
             return item
+        
+    return None
 
 
 
@@ -134,6 +136,9 @@ def delete_restaurant_item(restaurant_id: int, item_name: str):
                 if item["name"] == item_name:
                     del items[index]
                     _write_data(restaurants)
+                    return True
+            return False
+    return False
 
 
 def swap_restaurant_id(restaurant_id: int, new_id: int):
@@ -149,12 +154,13 @@ def swap_restaurant_id(restaurant_id: int, new_id: int):
             rest2 = restaurant
 
     if rest1 is None or rest2 is None:
-        return None
+        return False
 
     rest1["id"], rest2["id"] = rest2["id"], rest1["id"] #python made this so much easier than java
 
     restaurants.sort(key=lambda item: item["id"])
     _write_data(restaurants)
+    return True
 
 
 
