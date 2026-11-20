@@ -98,3 +98,13 @@ Entry 10
 - Influence: To write code required for login.html to run
 - Validation: Ensured page ran as expected
 - PR: #72
+
+Entry 11
+- Student: Rayan Cooper
+- Artifact: frontEnd\Account.html, frontEnd\Account.js
+- Label: AI-Assisted
+- AI tool: Claude
+- Purpose: Wrote the Account.js code
+- Influence: To write code required for Account.html to run
+- Validation: Ensured page ran as expected
+- PR: #193
