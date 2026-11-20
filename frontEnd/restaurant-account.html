@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Account - Drop Chute</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <main class="card">
+        <h1>Restaurant account</h1>
+
+        <p class="error form-error" id="page-error" role="alert"></p>
+
+        <section id="restaurant-info" aria-labelledby="info-heading">
+            <h2 id="info-heading">Restaurant info</h2>
+            <p><strong>Name:</strong> <span id="info-name">Restaurant name</span></p>
+            <p><strong>Cuisine:</strong> <span id="info-cuisine">Cuisine</span></p>
+            <p><strong>Address:</strong> <span id="info-address">Restaurant address</span></p>
+        </section>
+
+        <hr>
+
+        <section id="restaurant-settings" aria-labelledby="settings-heading">
+            <h2 id="settings-heading">Settings</h2>
+
+            <form id="settings-form" novalidate>
+                <div class="field">
+                    <label for="restaurant-name">Name</label>
+                    <input id="restaurant-name" name="name">
+                    <p class="error" id="restaurant-name-error" role="alert"></p>
+                </div>
+
+                <div class="field">
+                    <label for="restaurant-cuisine">Cuisine</label>
+                    <input id="restaurant-cuisine" name="Cuisine">
+                    <p class="error" id="restaurant-cuisine-error" role="alert"></p>
+                </div>
+
+                <div class="field">
+                    <label for="restaurant-address">Address</label>
+                    <input id="restaurant-address" name="address" autocomplete="street-address">
+                    <p class="error" id="restaurant-address-error" role="alert"></p>
+                </div>
+
+                <p id="save-message" role="status"></p>
+
+                <button type="submit" id="save-button">Save settings</button>
+            </form>
+        </section>
+
+        <p class="alt"><a href="restaurant.html">Back to restaurant side</a></p>
+    </main>
+
+    <script src="api.js"></script>
+</body>
+
+</html>
