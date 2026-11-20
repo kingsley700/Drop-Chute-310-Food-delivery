@@ -1,11 +1,15 @@
 
 import pytest
+from uuid import UUID
 from types import SimpleNamespace
 from fastapi import HTTPException
 from fastapi.testclient import TestClient
 from app.repositories import cart_repo, customer_repository
 from app.services import cart_service, restaurant_services
 from app.main import app
+
+RESTAURANT_ID = UUID("b6a58c65-6e0f-4d3d-af12-f95af139573a")
+OTHER_RESTAURANT_ID = UUID("6fea0a67-0de0-4513-8ee3-eb10ed2535f1")
 
 client = TestClient(app)
 
@@ -61,20 +65,20 @@ def test_service_get_or_create_cart(setup):
 ])
 def test_add_item_rejects_invalid_items(setup, item, quantity, status):
     with pytest.raises(HTTPException) as e:
-        cart_service.add_item_to_cart(1, 1, item, quantity)
+        cart_service.add_item_to_cart(1, RESTAURANT_ID, item, quantity)
     assert e.value.status_code == status
 
 
 def test_add_item_rejects_different_restaurant(setup):
-    cart_service.add_item_to_cart(1, 1, "Burger", 1)
+    cart_service.add_item_to_cart(1, RESTAURANT_ID, "Burger", 1)
     with pytest.raises(HTTPException) as e:
-        cart_service.add_item_to_cart(1, 2, "Burger", 1)
+        cart_service.add_item_to_cart(1, OTHER_RESTAURANT_ID, "Burger", 1)
     assert e.value.status_code == 400
 
 
 @pytest.mark.parametrize("action,args", [
     (cart_service.get_or_create_cart, (1,)),
-    (cart_service.add_item_to_cart, (1, 1, "Burger", 1)),
+    (cart_service.add_item_to_cart, (1, RESTAURANT_ID, "Burger", 1)),
     (cart_service.clear_cart, (1,)),
     (cart_service.get_cart, (1,))
 ])
@@ -93,14 +97,14 @@ def test_cart_endpoint_rejects_missing_customer(setup, monkeypatch):
 
 
 def test_add_item_to_cart(setup):
-    response = client.post("/customers/1/cart/items", json={"restaurant_id": 1, "item_name": "Burger", "quantity": 2})
+    response = client.post("/customers/1/cart/items", json={"restaurant_id": str(RESTAURANT_ID), "item_name": "Burger", "quantity": 2})
     assert response.status_code == 200
-    check_cart(response.json(), customer_id=1, restaurant_id=1, subtotal=20.0, tax=2.4, total=22.4)
+    check_cart(response.json(), customer_id=1, restaurant_id=str(RESTAURANT_ID), subtotal=20.0, tax=2.4, total=22.4)
     check_item(response.json(), name="Burger", price=10.0, quantity=2)
 
 
 def test_update_cart_item_quantity(setup):
-    client.post("/customers/1/cart/items", json={"restaurant_id": 1, "item_name": "Burger", "quantity": 1})
+    client.post("/customers/1/cart/items", json={"restaurant_id": str(RESTAURANT_ID), "item_name": "Burger", "quantity": 1})
     response = client.patch("/customers/1/cart/items/Burger", json={"quantity": 3})
     assert response.status_code == 200
     check_item(response.json(), quantity=3)
@@ -114,14 +118,14 @@ def test_update_invalid_quantity(setup, quantity):
 
 
 def test_update_cart_recalculates_totals(setup):
-    cart_service.add_item_to_cart(1, 1, "Burger", 1)
+    cart_service.add_item_to_cart(1, RESTAURANT_ID, "Burger", 1)
     response = client.patch("/customers/1/cart/items/Burger", json={"quantity": 3})
     assert response.status_code == 200
     check_cart(response.json(), subtotal=30.0, tax=3.6, total=33.6)
 
 
 def test_remove_cart_item(setup):
-    cart_service.add_item_to_cart(1, 1, "Burger", 2)
+    cart_service.add_item_to_cart(1, RESTAURANT_ID, "Burger", 2)
     data = client.delete("/customers/1/cart/items/Burger").json()
     assert data["items"] == []
     check_cart(data, subtotal=0, tax=0, total=0)
@@ -134,7 +138,7 @@ def test_remove_missing_cart_item(setup):
 
 
 def test_clear_cart(setup):
-    cart_service.add_item_to_cart(1, 1, "Burger", 2)
+    cart_service.add_item_to_cart(1, RESTAURANT_ID, "Burger", 2)
     data = client.delete("/customers/1/cart").json()
     assert data["items"] == []
     assert data["status"] == "active"
@@ -142,10 +146,10 @@ def test_clear_cart(setup):
 
 
 def test_get_cart_contents(setup):
-    cart_service.add_item_to_cart(1, 1, "Burger", 2)
+    cart_service.add_item_to_cart(1, RESTAURANT_ID, "Burger", 2)
     response = client.get("/customers/1/cart")
     assert response.status_code == 200
-    check_cart(response.json(), customer_id=1, restaurant_id=1, subtotal=20.0, tax=2.4, total=22.4)
+    check_cart(response.json(), customer_id=1, restaurant_id=str(RESTAURANT_ID), subtotal=20.0, tax=2.4, total=22.4)
     check_item(response.json(), name="Burger", price=10.0, quantity=2)
 
 

@@ -1,3 +1,5 @@
+from uuid import UUID
+
 from fastapi import APIRouter, HTTPException
 from app.services.restaurant_services import *
 from app.schemas.restaurantschemas import *
@@ -18,7 +20,7 @@ def restaurant_list():
     status_code=201,
     responses={500: {"description": "The restaurant data file could not be written"}}
 )
-def create_new_restaurant(restaurant: Restaurant):
+def create_new_restaurant(restaurant: RestaurantCreate):
     return create_restaurant(restaurant)
 
 
@@ -29,7 +31,7 @@ def create_new_restaurant(restaurant: Restaurant):
         404: {"description": "Restaurant not found"},
         500: {"description": "The restaurant data file could not be written"}
     })
-def create_new_item(restaurant_id: int, item: RestaurantItem):
+def create_new_item(restaurant_id: UUID, item: RestaurantItem):
     try:
         return add_restaurant_items(restaurant_id, item)
     except ValueError as error:
@@ -42,7 +44,7 @@ def create_new_item(restaurant_id: int, item: RestaurantItem):
         404: {"description": "Restaurant not found"},
         500: {"description": "The restaurant data file could not be written"}
     })
-def update_restaurant(restaurant_id: int, updates: RestaurantUpdate):
+def update_restaurant(restaurant_id: UUID, updates: RestaurantUpdate):
     try:
         restaurant = get_restaurant_by_id(restaurant_id)
         if restaurant is None:
@@ -65,7 +67,7 @@ def update_restaurant(restaurant_id: int, updates: RestaurantUpdate):
         500: {"description": "The restaurant data file could not be written"}
     }
 )
-def update_item(restaurant_id: int,item_name: str,updates: RestaurantItemUpdate):
+def update_item(restaurant_id: UUID,item_name: str,updates: RestaurantItemUpdate):
     try:    
         return update_restaurant_item(restaurant_id,item_name,new_name=updates.name,
             price=updates.price,description=updates.description)

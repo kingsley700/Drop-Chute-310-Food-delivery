@@ -1,3 +1,5 @@
+from uuid import UUID
+
 from pydantic import BaseModel, Field
 
 
@@ -8,7 +10,7 @@ class CartCreate(BaseModel):
 
 class CartItemCreate(BaseModel):
     """Request body for adding an item to a cart."""
-    restaurant_id: int
+    restaurant_id: UUID
     item_name: str
     quantity: int
 
@@ -30,7 +32,7 @@ class Cart(BaseModel):
     id: int
     customer_id: int
     status: str = "active"
-    restaurant_id: int | None = None
+    restaurant_id: UUID | None = None
     items: list[CartItem] = Field(default_factory=list)
     subtotal: float = 0.0
     tax: float = 0.0
@@ -42,7 +44,7 @@ class CartResponse(BaseModel):
     id: int
     customer_id: int
     status: str
-    restaurant_id: int | None = None
+    restaurant_id: UUID | None = None
     items: list[CartItem] = Field(default_factory=list)
     subtotal: float = 0.0
     tax: float = 0.0

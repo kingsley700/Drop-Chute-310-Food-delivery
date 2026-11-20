@@ -51,7 +51,7 @@ def create_cart(customer_id: int):
 
     cart = Cart(id=_next_id(records),customer_id=customer_id,status="active")
 
-    records.append(cart.model_dump())
+    records.append(cart.model_dump(mode="json"))
     _write_data(records)
 
     return cart
@@ -62,7 +62,7 @@ def update_cart(cart):
 
     for index, record in enumerate(carts):
         if record["id"] == cart.id:
-            carts[index] = cart.model_dump()
+            carts[index] = cart.model_dump(mode="json")
             _write_data(carts)
             return cart
 

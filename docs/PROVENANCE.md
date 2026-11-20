@@ -108,3 +108,13 @@ Entry 11
 - Influence: To write code required for Account.html to run
 - Validation: Ensured page ran as expected
 - PR: #193
+
+
+- Student: Teppei Onishi
+- Artifact: app/services/cart_service.py, app/schemas/cart.py, app/api/routes/restaurants.py, app/services/restaurant_services.py, tests/Test_cart.py, tests/test_resturaunts.py
+- Label: AI-Generated
+- AI tool: GPT-6.2-Sol
+- Purpose: Used it to mass replace function signatures and call sites with UUIDs. Also wrote a temporary script to fix test data.
+- Influence: Repetitive simple work that requires you to find every place where an integer ID was used before, and convert it to use UUIDs.
+- Validation: Page runs as expected, manually reviewed all changes, tests passed.
+- PR: #199
