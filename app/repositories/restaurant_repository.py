@@ -1,5 +1,5 @@
 # Restaurant IDs are permanent UUIDs.
-#if something breaks or is needed to be added email: vassilios.simeonidi@gmail.com
+# if something breaks or is needed to be added email: vassilios.simeonidi@gmail.com
 
 
 import json
@@ -28,6 +28,15 @@ def get_restaurant_by_id(restaurant_id: UUID):
     return None
 
 
+def get_restaurants_by_owner(owner_id: int):
+    """Returns the restaurants created by this customer."""
+    owned = []
+    for restaurant in get_restaurants():
+        if restaurant.get("owner_id") == owner_id:
+            owned.append(restaurant)
+    return owned
+
+
 def create_restaurant(restaurant: dict):
     """Creates a restaurant and assigns a permanent UUID."""
     restaurants = get_restaurants()
@@ -39,6 +48,7 @@ def create_restaurant(restaurant: dict):
     _write_data(restaurants)
 
     return new_restaurant
+
 
 def update_restaurant_name(restaurant_id: UUID, name: str):
     """Updates a restaurants name."""
@@ -75,7 +85,7 @@ def delete_restaurant(restaurant_id: UUID):
             restaurants.remove(restaurant)
             _write_data(restaurants)
             return True
-        
+
     return False
 
 
@@ -91,13 +101,18 @@ def add_restaurant_items(restaurant_id: UUID, item: dict):
             restaurant["items"].append(item)
             _write_data(restaurants)
             return item
-        
+
     return None
 
 
-
-
-def update_restaurant_item(restaurant_id: UUID, item_name: str, new_name: str | None = None, price: float | None = None, description: str | None = None, available: bool | None = None):
+def update_restaurant_item(
+    restaurant_id: UUID,
+    item_name: str,
+    new_name: str | None = None,
+    price: float | None = None,
+    description: str | None = None,
+    available: bool | None = None,
+):
     """Updates a menu item's name, price, description, or availability."""
     restaurants = _read_data()
 
@@ -120,8 +135,6 @@ def update_restaurant_item(restaurant_id: UUID, item_name: str, new_name: str | 
     return None
 
 
-
-
 def delete_restaurant_item(restaurant_id: UUID, item_name: str):
     """Deletes a menu item from a restaurant."""
     restaurants = _read_data()
@@ -137,7 +150,6 @@ def delete_restaurant_item(restaurant_id: UUID, item_name: str):
                     return True
             return False
     return False
-
 
 
 def _read_data():

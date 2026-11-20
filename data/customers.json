@@ -8,11 +8,11 @@
     "is_active": true
   },
   {
-    "id": 2,
-    "name": "Cooper",
-    "email": "Cooper@gmail.com",
-    "hashed_password": "$2b$12$VGHXT7HNwYMMdPNJrJVi/eqgSniOiL3qf9eFtwfx1lc7ZIUYYOYOm",
-    "delivery_address": "Cooperville",
-    "is_active": false
+    "id": 3,
+    "name": "Rayan",
+    "email": "Rayan@gmail.com",
+    "hashed_password": "$2b$12$CuyVnOvLKedCxFOiM0PKEu4h4XcXcGeDvtyH8TXWSfImJs308avza",
+    "delivery_address": "Rayanville",
+    "is_active": true
   }
 ]
