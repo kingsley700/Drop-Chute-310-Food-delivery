@@ -1,18 +1,18 @@
 [
-    {
-        "id": 1,
-        "name": "Test Customer",
-        "email": "test@example.com",
-        "hashed_password": "testpassword",
-        "delivery_address": "123 Main Street",
-        "is_active": true
-    },
+  {
+    "id": 1,
+    "name": "Test Customer",
+    "email": "test@example.com",
+    "hashed_password": "testpassword",
+    "delivery_address": "123 Main Street",
+    "is_active": true
+  },
   {
     "id": 2,
-    "name": "Rayan",
-    "email": "rayansemail@gmail.com",
-    "hashed_password": "$2b$12$ej8YzUEGCEnycV/AFO9dFOGI/g2jctyBr8s5p3jbTaQpWiK.gzvDW",
-    "delivery_address": "755 academy",
+    "name": "Cooper",
+    "email": "Cooper@gmail.com",
+    "hashed_password": "$2b$12$VGHXT7HNwYMMdPNJrJVi/eqgSniOiL3qf9eFtwfx1lc7ZIUYYOYOm",
+    "delivery_address": "Cooperville",
     "is_active": true
   }
 ]
