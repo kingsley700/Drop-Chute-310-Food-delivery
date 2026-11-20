@@ -129,6 +129,15 @@ Entry 12
 - Validation: Tested and ensured that users cannot modify other users' restaurants
 - PR: #203
 
+Entry 13
+- Student: Rayan Cooper
+- Artifact: tests\test_resturaunts.py
+- Label: AI-Assisted
+- AI tool: Claude
+- Purpose: Updated the necessary tests in order to account for tokens with signed in users
+- Influence: Modified code and updated tests
+- Validation: Ran all tests and passed as expected
+- PR: #204
 
 - Student: Teppei Onishi
 - Artifact: app/services/cart_service.py, app/schemas/cart.py, app/api/routes/restaurants.py, app/services/restaurant_services.py, tests/Test_cart.py, tests/test_resturaunts.py
