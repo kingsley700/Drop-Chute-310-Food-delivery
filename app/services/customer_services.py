@@ -32,3 +32,8 @@ def update_customer(customer_id: int, data: CustomerUpdate) -> CustomerResponse:
         raise NotFoundError("Customer not found")
     return CustomerResponse(**customer.model_dump())
 
+def deactivate_customer(customer_id: int) -> None:
+    """Deactivates a customer's account. Raises NotFoundError if there is no such customer."""
+    customer = customer_repository.deactivate_customer(customer_id)
+    if customer is None:
+        raise NotFoundError("Customer not found")

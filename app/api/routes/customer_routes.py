@@ -1,8 +1,13 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Response
 
 from app.exceptions import ConflictError
 from app.api.routes.dependencies import get_current_customer
-from app.schemas.customerschema import Customer, CustomerCreate, CustomerResponse, CustomerUpdate
+from app.schemas.customerschema import (
+    Customer,
+    CustomerCreate,
+    CustomerResponse,
+    CustomerUpdate,
+)
 from app.services import customer_services
 
 router = APIRouter(prefix="/customers", tags=["customers"])
@@ -64,3 +69,24 @@ def update_customer(
 ):
     """Changes the signed-in customer's delivery address."""
     return customer_services.update_customer(customer_id, data)
+
+
+@router.post(
+    "/{customer_id}/deactivate",
+    status_code=204,
+    summary="Deactivate my account",
+    responses={
+        204: {
+            "description": "Account deactivated. The account and its history are kept."
+        },
+        401: {"description": "Not signed in, or the sign-in has expired."},
+        403: {"description": "The account belongs to another customer."},
+        404: {"description": "The account does not exist."},
+    },
+)
+def deactivate_customer(
+    customer_id: int, customer: Customer = Depends(get_current_customer)
+):
+    """Deactivates the signed-in customer's own account. The account is kept, not deleted."""
+    customer_services.deactivate_customer(customer_id)
+    return Response(status_code=204)
