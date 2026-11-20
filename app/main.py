@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Request
-from fastapi.exceptions import RequestValidationError
+from fastapi.exceptions import RequestValidationError, NotFoundError
 from fastapi.responses import JSONResponse
 from app.api.routes.restaurants import router as restaurant_router
 from app.schemas.health import HealthResponse
@@ -57,3 +57,7 @@ def home():
 )
 def health_check():
     return {"status": "Ok"}
+
+@app.exception_handler(NotFoundError)
+def not_found_handler(request: Request, exc: NotFoundError):
+    return JSONResponse(status_code=404, content={"detail": str(exc)})

@@ -9,7 +9,23 @@ class CustomerCreate(BaseModel):
     password: str = Field(..., min_length=6, max_length=72)
     delivery_address: str = Field(..., min_length=1, max_length=200)
 
-    @field_validator("name", "delivery_address")  # To make sure name and address aren't empty
+    @field_validator(
+        "name", "delivery_address"
+    )  # To make sure name and address aren't empty
+    @classmethod
+    def not_blank(cls, value: str) -> str:
+        value = value.strip()
+        if value == "":
+            raise ValueError("must not be blank")
+        return value
+
+
+class CustomerUpdate(BaseModel):
+    """Request body for updating an account (PATCH /customers/{id})."""
+
+    delivery_address: str = Field(..., min_length=1, max_length=200)
+
+    @field_validator("delivery_address")
     @classmethod
     def not_blank(cls, value: str) -> str:
         value = value.strip()

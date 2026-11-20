@@ -65,3 +65,13 @@ def create_customer(name, email, hashed_password, delivery_address):
     records.append(customer.model_dump())
     _write_data(records)
     return customer
+
+def update_customer_address(customer_id: int, delivery_address: str):
+    """Changes a customer's delivery address and returns the updated customer, or None if not found."""
+    records = _read_data()
+    for record in records:
+        if record["id"] == customer_id:
+            record["delivery_address"] = delivery_address
+            _write_data(records)
+            return Customer(**record)
+    return None
