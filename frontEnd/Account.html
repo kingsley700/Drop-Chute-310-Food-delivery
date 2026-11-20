@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account - Drop Chute</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <main class="card">
+        <h1>My account</h1>
+
+        <p class="error form-error" id="page-error" role="alert"></p>
+
+        <div id="account-details" hidden>
+            <p><strong>Name:</strong> <span id="name"></span></p>
+            <p><strong>Email:</strong> <span id="email"></span></p>
+
+            <form id="address-form" novalidate>
+                <div class="field">
+                    <label for="delivery-address">Delivery address</label>
+                    <input id="delivery-address" name="delivery_address" type="text" autocomplete="street-address">
+                    <p class="error" id="delivery-address-error" role="alert"></p>
+                </div>
+
+                <p id="save-message" role="status"></p>
+
+                <button type="submit" id="save-button">Save address</button>
+            </form>
+
+            <hr>
+
+            <button type="button" id="deactivate-button">Deactivate my account</button>
+        </div>
+
+        <p class="alt"><a href="customer.html">Back to restaurants</a></p>
+    </main>
+
+    <script src="api.js"></script>
+    <script src="account.js"></script>
+</body>
+
+</html>

@@ -100,6 +100,16 @@ Entry 10
 - PR: #72
 
 Entry 11
+- Student: Rayan Cooper
+- Artifact: frontEnd\Account.html, frontEnd\Account.js
+- Label: AI-Assisted
+- AI tool: Claude
+- Purpose: Wrote the Account.js code
+- Influence: To write code required for Account.html to run
+- Validation: Ensured page ran as expected
+- PR: #193
+
+
 - Student: Teppei Onishi
 - Artifact: app/services/cart_service.py, app/schemas/cart.py, app/api/routes/restaurants.py, app/services/restaurant_services.py, tests/Test_cart.py, tests/test_resturaunts.py
 - Label: AI-Generated

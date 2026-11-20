@@ -174,4 +174,6 @@ document.getElementById("clear-cart-button").addEventListener("click", () => {
 
 
 // Start page
-loadRestaurants();
+if (customerId !== null) {
+    loadRestaurants();
+}
