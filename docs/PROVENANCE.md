@@ -68,3 +68,13 @@ Entry 7
 - Influence: Required assistance in the writing of html and what specific commands did
 - Validation: Ensured that the page provided what was requested and made sure links worked
 - PR: #66
+
+Entry 8
+- Student: Rayan Cooper
+- Artifact: tests\test_auth_routes.py
+- Label: AI-Assisted
+- AI tool: Claude
+- Purpose: To fix the tests written and ensure that they return errors accordingly
+- Influence: Required assistance in the creation of the tests due to struggling to understand how certain things worked
+- Validation: Ensured that each of the tests functioned as required
+- PR: #70
