@@ -3,8 +3,8 @@ let restaurants = [];
 async function loadRestaurants() {
 
     try {
-        const response = await fetch(
-            "http://127.0.0.1:8000/restaurants" 
+        const response = await apiFetch(
+            "/restaurants" 
         );
 
         if(!response.ok) {
@@ -63,8 +63,8 @@ createForm.addEventListener("submit", async function (event) {
 
     try {
 
-        const response = await fetch(
-            "http://127.0.0.1:8000/CreateRestaurant",
+        const response = await apiFetch(
+            "/CreateRestaurant",
             {
                 method: "POST",
                 headers: {

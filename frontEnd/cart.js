@@ -9,8 +9,8 @@ export async function loadCart(customerId, restaurants) {
     cartTotals.hidden = true;
 
     try {
-        const response = await fetch(
-            `http://127.0.0.1:8000/customers/${customerId}/cart`
+        const response = await apiFetch(
+            `/customers/${customerId}/cart`
         );
 
         if (response.status === 404) {
@@ -87,8 +87,8 @@ export function displayCart(cart, restaurants, customerId) {
 // Removes an item from the cart
 async function removeCartItem(customerId, itemName, restaurants) {
     try {
-        const response = await fetch(
-            `http://127.0.0.1:8000/customers/${customerId}/cart/items/${encodeURIComponent(itemName)}`,
+        const response = await apiFetch(
+            `/customers/${customerId}/cart/items/${encodeURIComponent(itemName)}`,
             {
                 method: "DELETE"
             }
@@ -128,8 +128,8 @@ export function formatPrice(price) {
 
 export async function clearCart(customerId, restaurants) {
     try {
-        const response = await fetch(
-            `http://127.0.0.1:8000/customers/${customerId}/cart`,
+        const response = await apiFetch(
+            `/customers/${customerId}/cart`,
             {
                 method: "DELETE"
             }

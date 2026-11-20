@@ -1,4 +1,3 @@
-const API_URL = "http://127.0.0.1:8000";
 const SIGN_IN_PAGE = "login.html";
 
 const FIELDS = ["name", "email", "password", "delivery_address"];
@@ -97,7 +96,7 @@ form.addEventListener("submit", async function (event) {
     submitButton.textContent = "Registering...";
 
     try {
-        const response = await fetch(API_URL + "/customers", {
+        const response = await apiFetch("/customers", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(values),

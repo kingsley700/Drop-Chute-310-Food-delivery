@@ -78,3 +78,13 @@ Entry 8
 - Influence: Required assistance in the creation of the tests due to struggling to understand how certain things worked
 - Validation: Ensured that each of the tests functioned as required
 - PR: #70
+
+Entry 9
+- Student: Rayan Cooper
+- Artifact: frontEnd\api.js, frontEnd\app.js, frontEnd\customer.html, frontEnd\restaurant.html
+- Label: AI-Assisted
+- AI tool: Claude
+- Purpose: To write and update the API key/token for html files
+- Influence: Couldn't understand why certain points weren't being reached and why the tokens were failing to go through
+- Validation: Checked in browser using F12 and using network tools, alongside with setToken("abc123") in the terminal
+- PR: #73
