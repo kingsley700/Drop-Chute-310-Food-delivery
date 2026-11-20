@@ -1,3 +1,5 @@
+from uuid import UUID
+
 from pydantic import BaseModel, Field
 
 class RestaurantItem(BaseModel):
@@ -7,10 +9,16 @@ class RestaurantItem(BaseModel):
     available: bool = True
 
 class Restaurant(BaseModel):
-    id: int
+    id: UUID
     name: str
     cuisine: str
     items: list[RestaurantItem]
+
+class RestaurantCreate(BaseModel):
+    name: str
+    cuisine: str
+    items: list[RestaurantItem] = Field(default_factory=list)
+
 
 #schema for updating a restaurant
 class RestaurantUpdate(BaseModel):
