@@ -3,9 +3,10 @@ from uuid import UUID
 import pytest
 from fastapi.testclient import TestClient
 from app.main import app
-from app.repositories import restaurant_repository as repo
+from app.repositories import customer_repository, restaurant_repository as repo
 from app.services import restaurant_services as service
 from app.schemas.restaurantschemas import Restaurant, RestaurantCreate, RestaurantItem
+from app.tokens import create_access_token
 
 GOLDEN_ISLAND_ID = UUID("b6a58c65-6e0f-4d3d-af12-f95af139573a")
 BAMBOO_CHOPSTICKS_ID = UUID("6fea0a67-0de0-4513-8ee3-eb10ed2535f1")
@@ -17,17 +18,46 @@ client = TestClient(app)
 
 @pytest.fixture
 def restaurant_file(tmp_path, monkeypatch):
+    # One signed-in customer (id 1) who owns all three restaurants
+    customers = tmp_path / "customers.json"
+    customers.write_text("[]", encoding="utf-8")
+    monkeypatch.setattr(customer_repository, "filep", str(customers))
+    customer_repository.create_customer(
+        "Sam Graham", "sam@gmail.com", "hash1", "755 Academy Way"
+    )
+
     data = [
-        {"id": str(GOLDEN_ISLAND_ID), "name": "Golden Island", "cuisine": "Chinese", "items": [
-            {"name": "Can Pop", "price": 2.25, "available": True}
-        ]},
-        {"id": str(BAMBOO_CHOPSTICKS_ID), "name": "Bamboo Chopsticks", "cuisine": "Vietnamese", "items": []},
-        {"id": str(CHIPOTLE_ID), "name": "Chipotle", "cuisine": "Mexican", "items": []}
+        {
+            "id": str(GOLDEN_ISLAND_ID),
+            "name": "Golden Island",
+            "cuisine": "Chinese",
+            "owner_id": 1,
+            "items": [{"name": "Can Pop", "price": 2.25, "available": True}],
+        },
+        {
+            "id": str(BAMBOO_CHOPSTICKS_ID),
+            "name": "Bamboo Chopsticks",
+            "cuisine": "Vietnamese",
+            "owner_id": 1,
+            "items": [],
+        },
+        {
+            "id": str(CHIPOTLE_ID),
+            "name": "Chipotle",
+            "cuisine": "Mexican",
+            "owner_id": 1,
+            "items": [],
+        },
     ]
     file = tmp_path / "restaurants.json"
     file.write_text(json.dumps(data), encoding="utf-8")
     monkeypatch.setattr(repo, "filep", str(file))
     return file
+
+
+def auth():
+    """Token for customer 1, who owns the test restaurants."""
+    return {"Authorization": "Bearer " + create_access_token(1)}
 
 
 def read_file(file):
@@ -36,10 +66,15 @@ def read_file(file):
 
 # API tests
 
+
 def test_list_restaurants(restaurant_file):
     response = client.get("/restaurants")
     assert response.status_code == 200
-    assert [r["id"] for r in response.json()] == [str(GOLDEN_ISLAND_ID), str(BAMBOO_CHOPSTICKS_ID), str(CHIPOTLE_ID)]
+    assert [r["id"] for r in response.json()] == [
+        str(GOLDEN_ISLAND_ID),
+        str(BAMBOO_CHOPSTICKS_ID),
+        str(CHIPOTLE_ID),
+    ]
     for restaurant in response.json():
         Restaurant(**restaurant)
 
@@ -50,9 +85,11 @@ def test_empty_restaurants(restaurant_file):
 
 
 def test_create_restaurant(restaurant_file):
-    response = client.post("/CreateRestaurant", json={
-        "name": "Tossings", "cuisine": "Italian"
-    })
+    response = client.post(
+        "/CreateRestaurant",
+        json={"name": "Tossings", "cuisine": "Italian"},
+        headers=auth(),
+    )
     assert response.status_code == 201
     created = response.json()
     assert created["name"] == "Tossings"
@@ -61,50 +98,93 @@ def test_create_restaurant(restaurant_file):
 
 
 def test_create_invalid_restaurant(restaurant_file):
-    assert client.post("/CreateRestaurant", json={"name": "Tossings"}).status_code == 422
+    assert (
+        client.post(
+            "/CreateRestaurant", json={"name": "Tossings"}, headers=auth()
+        ).status_code
+        == 422
+    )
 
 
 def test_add_item(restaurant_file):
-    response = client.post(f"/restaurants/{CHIPOTLE_ID}/items", json={"name": "Burrito", "price": 12})
+    response = client.post(
+        f"/restaurants/{CHIPOTLE_ID}/items",
+        json={"name": "Burrito", "price": 12},
+        headers=auth(),
+    )
     assert response.status_code == 201
     assert read_file(restaurant_file)[2]["items"][0]["name"] == "Burrito"
 
 
 def test_malformed_restaurant_id(restaurant_file):
-    assert client.patch("/restaurants/invalid", json={"name": "Unknown"}).status_code == 422
+    assert (
+        client.patch(
+            "/restaurants/invalid", json={"name": "Unknown"}, headers=auth()
+        ).status_code
+        == 422
+    )
 
 
 def test_add_item_unknown_restaurant(restaurant_file):
-    assert client.post(f"/restaurants/{UNKNOWN_ID}/items", json={"name": "Burrito", "price": 12}).status_code == 404
+    assert (
+        client.post(
+            f"/restaurants/{UNKNOWN_ID}/items",
+            json={"name": "Burrito", "price": 12},
+            headers=auth(),
+        ).status_code
+        == 404
+    )
 
 
 def test_update_restaurant(restaurant_file):
-    response = client.patch(f"/restaurants/{GOLDEN_ISLAND_ID}", json={"name": "New Name", "cuisine": "Japanese"})
+    response = client.patch(
+        f"/restaurants/{GOLDEN_ISLAND_ID}",
+        json={"name": "New Name", "cuisine": "Japanese"},
+        headers=auth(),
+    )
     assert response.status_code == 200
     assert read_file(restaurant_file)[0]["name"] == "New Name"
 
 
 def test_update_unknown_restaurant(restaurant_file):
-    assert client.patch(f"/restaurants/{UNKNOWN_ID}", json={"name": "Unknown"}).status_code == 404
+    assert (
+        client.patch(
+            f"/restaurants/{UNKNOWN_ID}", json={"name": "Unknown"}, headers=auth()
+        ).status_code
+        == 404
+    )
 
 
 def test_update_item(restaurant_file):
-    response = client.patch(f"/restaurants/{GOLDEN_ISLAND_ID}/items/Can Pop", json={"name": "Soda", "price": 3})
+    response = client.patch(
+        f"/restaurants/{GOLDEN_ISLAND_ID}/items/Can Pop",
+        json={"name": "Soda", "price": 3},
+        headers=auth(),
+    )
     assert response.status_code == 200
     assert read_file(restaurant_file)[0]["items"][0]["name"] == "Soda"
 
 
-@pytest.mark.parametrize("restaurant_id,item,status", [
-    (GOLDEN_ISLAND_ID, "Donut", 404),
-    (UNKNOWN_ID, "Can Pop", 404)
-])
+@pytest.mark.parametrize(
+    "restaurant_id,item,status",
+    [(GOLDEN_ISLAND_ID, "Donut", 404), (UNKNOWN_ID, "Can Pop", 404)],
+)
 def test_update_item_unknown(restaurant_file, restaurant_id, item, status):
-    response = client.patch(f"/restaurants/{restaurant_id}/items/{item}", json={"price": 3})
+    response = client.patch(
+        f"/restaurants/{restaurant_id}/items/{item}", json={"price": 3}, headers=auth()
+    )
     assert response.status_code == status
 
 
 def test_invalid_price(restaurant_file):
-    assert client.patch(f"/restaurants/{GOLDEN_ISLAND_ID}/items/Can Pop", json={"price": -1}).status_code == 422
+    assert (
+        client.patch(
+            f"/restaurants/{GOLDEN_ISLAND_ID}/items/Can Pop",
+            json={"price": -1},
+            headers=auth(),
+        ).status_code
+        == 422
+    )
 
 
 def test_wrong_methods(restaurant_file):
@@ -126,9 +206,12 @@ def test_corrupt_file(restaurant_file):
 
 # Repository tests
 
+
 def test_get_restaurants(restaurant_file):
     assert len(repo.get_restaurants()) == 3
-    assert repo.get_restaurant_by_id(BAMBOO_CHOPSTICKS_ID)["name"] == "Bamboo Chopsticks"
+    assert (
+        repo.get_restaurant_by_id(BAMBOO_CHOPSTICKS_ID)["name"] == "Bamboo Chopsticks"
+    )
     assert repo.get_restaurant_by_id(UNKNOWN_ID) is None
 
 
@@ -159,7 +242,9 @@ def test_add_item_repository(restaurant_file):
 
 
 def test_update_item_repository(restaurant_file):
-    repo.update_restaurant_item(GOLDEN_ISLAND_ID, "Can Pop", new_name="Soda", price=3, available=False)
+    repo.update_restaurant_item(
+        GOLDEN_ISLAND_ID, "Can Pop", new_name="Soda", price=3, available=False
+    )
     item = read_file(restaurant_file)[0]["items"][0]
     assert item["name"] == "Soda"
     assert item["available"] is False
@@ -171,13 +256,18 @@ def test_delete_item_repository(restaurant_file):
     assert read_file(restaurant_file)[0]["items"] == []
 
 
-
 # Service tests
+
 
 def test_get_restaurants_service(restaurant_file):
     assert len(service.get_restaurants()) == 3
-    assert service.get_restaurant_by_id(BAMBOO_CHOPSTICKS_ID)["name"] == "Bamboo Chopsticks"
-    assert service.get_restaurant_by_name("Bamboo Chopsticks")["cuisine"] == "Vietnamese"
+    assert (
+        service.get_restaurant_by_id(BAMBOO_CHOPSTICKS_ID)["name"]
+        == "Bamboo Chopsticks"
+    )
+    assert (
+        service.get_restaurant_by_name("Bamboo Chopsticks")["cuisine"] == "Vietnamese"
+    )
 
 
 def test_create_restaurant_service(restaurant_file):
@@ -207,7 +297,9 @@ def test_add_item_service(restaurant_file):
 
 
 def test_update_item_service(restaurant_file):
-    service.update_restaurant_item(GOLDEN_ISLAND_ID, "Can Pop", new_name="Soda", price=3, available=False)
+    service.update_restaurant_item(
+        GOLDEN_ISLAND_ID, "Can Pop", new_name="Soda", price=3, available=False
+    )
     item = read_file(restaurant_file)[0]["items"][0]
     assert item["name"] == "Soda"
     assert item["available"] is False
