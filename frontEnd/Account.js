@@ -16,20 +16,6 @@ const deactivateButton = document.getElementById("deactivate-button");
 
 
 // A 401 on a request that carried a token means it expired or the account is inactive
-function sessionEnded() {
-    clearToken();
-    window.location.href = LOGIN_PAGE;
-}
-
-function errorMessageFor(status) {
-    if (status === 403) {
-        return "You do not have access to this account.";
-    }
-    if (status === 404) {
-        return "Account not found.";
-    }
-    return "Something went wrong. Please try again.";
-}
 
 async function loadAccount() {
     try {
@@ -41,8 +27,6 @@ async function loadAccount() {
             document.getElementById("email").textContent = customer.email;
             addressInput.value = customer.delivery_address;
             details.hidden = false;
-        } else if (response.status === 401) {
-            sessionEnded();
         } else {
             pageError.textContent = errorMessageFor(response.status);
         }
@@ -77,9 +61,6 @@ addressForm.addEventListener("submit", async function (event) {
             const customer = await response.json();
             addressInput.value = customer.delivery_address;
             saveMessage.textContent = "Address saved.";
-        } else if (response.status === 401) {
-            sessionEnded();
-            return;
         } else if (response.status === 422) {
             addressError.textContent = "Delivery address must be 1 to 200 characters";
             addressInput.classList.add("invalid");
@@ -111,10 +92,6 @@ deactivateButton.addEventListener("click", async function () {
         if (response.status === 204) {
             clearToken();
             window.location.href = LOGIN_PAGE;
-            return;
-        }
-        if (response.status === 401) {
-            sessionEnded();
             return;
         }
         pageError.textContent = errorMessageFor(response.status);
