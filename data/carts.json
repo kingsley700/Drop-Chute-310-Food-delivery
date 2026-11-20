@@ -8,5 +8,21 @@
     "subtotal": 0.0,
     "tax": 0.0,
     "total": 0.0
+  },
+  {
+    "id": 2,
+    "customer_id": 2,
+    "status": "active",
+    "restaurant_id": 1,
+    "items": [
+      {
+        "name": "Can Pop",
+        "price": 2.25,
+        "quantity": 1
+      }
+    ],
+    "subtotal": 2.25,
+    "tax": 0.27,
+    "total": 2.52
   }
 ]

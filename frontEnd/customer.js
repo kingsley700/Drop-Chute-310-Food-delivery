@@ -3,14 +3,18 @@ import { loadCart, clearCart } from "./cart.js";
 const statusElement = document.getElementById("restaurant-status");
 const restaurantList = document.getElementById("restaurant-list");
 let restaurants = [];
-const customerId = 1; //TODO: Replace with actual customer ID when authentication is implemented
+const customerId = getCustomerId();
+if (customerId === null){
+    window.location.href = "login.html";
+}
+ //TODO: Replace with actual customer ID when authentication is implemented
 
 
 async function loadRestaurants() {
     statusElement.textContent = "Loading restaurants...";
 
     try {
-        const response = await fetch("http://127.0.0.1:8000/restaurants");
+        const response = await apiFetch("/restaurants");
 
         if (!response.ok) {
             throw new Error(`HTTP error ${response.status}`);
@@ -108,8 +112,8 @@ function displayMenu(items, restaurantId) {
 
 async function addToCart(restaurantId, itemName) {
     try {
-        const response = await fetch(
-            `http://127.0.0.1:8000/customers/${customerId}/cart/items`,
+        const response = await apiFetch(
+            `/customers/${customerId}/cart/items`,
             {
                 method: "POST",
                 headers: {

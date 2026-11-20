@@ -68,3 +68,33 @@ Entry 7
 - Influence: Required assistance in the writing of html and what specific commands did
 - Validation: Ensured that the page provided what was requested and made sure links worked
 - PR: #66
+
+Entry 8
+- Student: Rayan Cooper
+- Artifact: tests\test_auth_routes.py
+- Label: AI-Assisted
+- AI tool: Claude
+- Purpose: To fix the tests written and ensure that they return errors accordingly
+- Influence: Required assistance in the creation of the tests due to struggling to understand how certain things worked
+- Validation: Ensured that each of the tests functioned as required
+- PR: #70
+
+Entry 9
+- Student: Rayan Cooper
+- Artifact: frontEnd\api.js, frontEnd\app.js, frontEnd\customer.html, frontEnd\restaurant.html
+- Label: AI-Assisted
+- AI tool: Claude
+- Purpose: To write and update the API key/token for html files
+- Influence: Couldn't understand why certain points weren't being reached and why the tokens were failing to go through
+- Validation: Checked in browser using F12 and using network tools, alongside with setToken("abc123") in the terminal
+- PR: #73
+
+Entry 10
+- Student: Rayan Cooper
+- Artifact: frontEnd\login.js
+- Label: AI-Assisted
+- AI tool: Claude
+- Purpose: Wrote the login.js code
+- Influence: To write code required for login.html to run
+- Validation: Ensured page ran as expected
+- PR: #72
