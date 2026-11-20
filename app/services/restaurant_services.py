@@ -14,9 +14,17 @@ def get_restaurant_by_id(restaurant_id: UUID):
     return restaurant_repository.get_restaurant_by_id(restaurant_id)
 
 
-def create_restaurant(restaurant: RestaurantCreate):
-    """Creates a restaurant and assigns a permanent UUID."""
-    return restaurant_repository.create_restaurant(restaurant.model_dump())
+def get_restaurants_by_owner(owner_id: int):
+    """Returns the restaurants created by this customer."""
+    return restaurant_repository.get_restaurants_by_owner(owner_id)
+
+
+def create_restaurant(restaurant: RestaurantCreate, owner_id: int | None = None):
+    """Creates a restaurant and assigns a permanent UUID. owner_id is the customer who created it."""
+    data = restaurant.model_dump()
+    if owner_id is not None:
+        data["owner_id"] = owner_id
+    return restaurant_repository.create_restaurant(data)
 
 
 def update_restaurant_name(restaurant_id: UUID, name: str):
@@ -27,6 +35,7 @@ def update_restaurant_name(restaurant_id: UUID, name: str):
 
     return result
 
+
 def update_restaurant_cuisine(restaurant_id: UUID, cuisine: str):
     """Updates a restaurants cuisine."""
     result = restaurant_repository.update_restaurant_cuisine(restaurant_id, cuisine)
@@ -35,6 +44,7 @@ def update_restaurant_cuisine(restaurant_id: UUID, cuisine: str):
 
     return result
 
+
 def delete_restaurant(restaurant_id: UUID):
     """Deletes a restaurant."""
     return restaurant_repository.delete_restaurant(restaurant_id)
@@ -42,17 +52,27 @@ def delete_restaurant(restaurant_id: UUID):
 
 def add_restaurant_items(restaurant_id: UUID, item: RestaurantItem):
     """Adds a menu item to a restaurant. ex: (1, add_restaurant_items{"name": "soup", "price": 3000})"""
-    result = restaurant_repository.add_restaurant_items(restaurant_id, item.model_dump())
+    result = restaurant_repository.add_restaurant_items(
+        restaurant_id, item.model_dump()
+    )
     if result is None:
         raise ValueError("Restaurant not found")
 
     return result
 
 
-
-def update_restaurant_item(restaurant_id: UUID, item_name: str, new_name: str | None = None, price: float | None = None, description: str | None = None, available: bool | None = None):
+def update_restaurant_item(
+    restaurant_id: UUID,
+    item_name: str,
+    new_name: str | None = None,
+    price: float | None = None,
+    description: str | None = None,
+    available: bool | None = None,
+):
     """Updates a menu item's name, price, description, or availability."""
-    result = restaurant_repository.update_restaurant_item(restaurant_id, item_name, new_name, price, description, available)
+    result = restaurant_repository.update_restaurant_item(
+        restaurant_id, item_name, new_name, price, description, available
+    )
     if result is None:
         raise ValueError("Restaurant or menu item not found")
 
@@ -66,7 +86,6 @@ def delete_restaurant_item(restaurant_id: UUID, item_name: str):
         raise ValueError("Restaurant not found")
 
     return result
-
 
 
 def get_restaurant_by_name(name: str):

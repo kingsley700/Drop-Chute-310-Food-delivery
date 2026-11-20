@@ -109,6 +109,26 @@ Entry 11
 - Validation: Ensured page ran as expected
 - PR: #193
 
+Entry 12
+- Student: Rayan Cooper
+- Artifact: frontEnd\restaurant.js
+- Label: AI-generated
+- AI tool: Claude
+- Purpose: To create the required js file for restaurant.html in the correct format
+- Influence: Wrote the restaurant-account.js code
+- Validation: Ensured page ran as expected
+- PR: #203
+
+Entry 12
+- Student: Rayan Cooper
+- Artifact: app\services\restaurant_services.py, app\repositories\restaurant_repository.py, app\api\routes\customer_routes.py, app\api\routes\restaurants.py
+- Label: AI-Assisted
+- AI tool: Claude
+- Purpose: Wasn't sure what and how to modify certain files to adjust according to the requirements and requested Claude to assist in uncertainty in my code
+- Influence: Modified code and added required dependencies
+- Validation: Tested and ensured that users cannot modify other users' restaurants
+- PR: #203
+
 
 - Student: Teppei Onishi
 - Artifact: app/services/cart_service.py, app/schemas/cart.py, app/api/routes/restaurants.py, app/services/restaurant_services.py, tests/Test_cart.py, tests/test_resturaunts.py
