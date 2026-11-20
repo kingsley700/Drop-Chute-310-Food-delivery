@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Request
-from fastapi.exceptions import RequestValidationError, NotFoundError
+from fastapi.exceptions import RequestValidationError
+from app.exceptions import NotFoundError
 from fastapi.responses import JSONResponse
 from app.api.routes.restaurants import router as restaurant_router
 from app.schemas.health import HealthResponse

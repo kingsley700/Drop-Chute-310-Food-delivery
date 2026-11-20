@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 
 from app.exceptions import ConflictError
-from app.api.dependencies import get_current_customer
+from app.api.routes.dependencies import get_current_customer
 from app.schemas.customerschema import Customer, CustomerCreate, CustomerResponse, CustomerUpdate
 from app.services import customer_services
 

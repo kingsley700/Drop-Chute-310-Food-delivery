@@ -1,8 +1,7 @@
-from app.exceptions import ConflictError
+from app.exceptions import ConflictError, NotFoundError
 from app.repositories import customer_repository
 from app.schemas.customerschema import CustomerCreate, CustomerResponse, CustomerUpdate
 from app.security import hash_password
-from exceptions import NotFoundError
 
 
 def register_customer(data: CustomerCreate) -> CustomerResponse:
