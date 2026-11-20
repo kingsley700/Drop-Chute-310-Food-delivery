@@ -75,3 +75,13 @@ def update_customer_address(customer_id: int, delivery_address: str):
             _write_data(records)
             return Customer(**record)
     return None
+
+def deactivate_customer(customer_id: int):
+    """Marks a customer inactive (the record is kept) and returns it, or None if not found."""
+    records = _read_data()
+    for record in records:
+        if record["id"] == customer_id:
+            record["is_active"] = False
+            _write_data(records)
+            return Customer(**record)
+    return None
