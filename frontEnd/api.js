@@ -16,13 +16,30 @@ function clearToken() {
 }
 
 // Works like fetch, instead goes through path like "/customers" and adds token when signed in
-function apiFetch(path, options = {}) {
+// now handles ended session. 401 request that sent token means that token is expired or invalid, so now we clear it and go to login page.
+async function apiFetch(path, options = {}) {
     const headers = Object.assign({}, options.headers);
     const token = getToken();
-    if (token) {
+    const isLoginRequest = path == "/auth/login";
+    if (token && !isLoginRequest) {
         headers["Authorization"] = "Bearer " + token;
     }
-    return fetch(API_URL + path, Object.assign({}, options, { headers: headers }));
+    const response = await fetch(API_URL + path, Object.assign({}, options, { headers: headers }));
+    if (response.status === 401 && token && !isLoginRequest) {
+        clearToken();
+        window.location.href = "login.html"
+    }
+    return response
+}
+
+function errorMessageFor(status) {
+    if (status === 403) {
+        return "You do not have access to this account.";
+    }
+    if (status === 404) {
+        return "Account not found.";
+    }
+    return "Something went wrong. Please try again.";
 }
 
 function getCustomerId() {
