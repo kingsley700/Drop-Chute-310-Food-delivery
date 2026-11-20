@@ -22,13 +22,19 @@ def create_restaurant(restaurant: Restaurant):
 
 def update_restaurant_name(restaurant_id: int, name: str):
     """Updates a restaurants name."""
-    return restaurant_repository.update_restaurant_name(restaurant_id, name)
+    result = restaurant_repository.update_restaurant_name(restaurant_id, name)
+    if result is None:
+        raise ValueError("Restaurant not found")
 
+    return result
 
 def update_restaurant_cuisine(restaurant_id: int, cuisine: str):
     """Updates a restaurants cuisine."""
-    return restaurant_repository.update_restaurant_cuisine(restaurant_id, cuisine)
+    result = restaurant_repository.update_restaurant_cuisine(restaurant_id, cuisine)
+    if result is None:
+        raise ValueError("Restaurant not found")
 
+    return result
 
 def delete_restaurant(restaurant_id: int):
     """Deletes a restaurant and renumbers IDs."""
@@ -37,22 +43,39 @@ def delete_restaurant(restaurant_id: int):
 
 def add_restaurant_items(restaurant_id: int, item: RestaurantItem):
     """Adds a menu item to a restaurant. ex: (1, add_restaurant_items{"name": "soup", "price": 3000})"""
-    return restaurant_repository.add_restaurant_items(restaurant_id, item.model_dump())
+    result = restaurant_repository.add_restaurant_items(restaurant_id, item.model_dump())
+    if result is None:
+        raise ValueError("Restaurant not found")
+
+    return result
+
 
 
 def update_restaurant_item(restaurant_id: int, item_name: str, new_name: str | None = None, price: float | None = None, description: str | None = None, available: bool | None = None):
     """Updates a menu item's name, price, description, or availability."""
-    return restaurant_repository.update_restaurant_item(restaurant_id, item_name, new_name, price, description, available)
+    result = restaurant_repository.update_restaurant_item(restaurant_id, item_name, new_name, price, description, available)
+    if result is None:
+        raise ValueError("Restaurant or menu item not found")
+
+    return result
 
 
 def delete_restaurant_item(restaurant_id: int, item_name: str):
     """Deletes a menu item from a restaurant."""
-    return restaurant_repository.delete_restaurant_item(restaurant_id, item_name)
+    result = restaurant_repository.delete_restaurant_item(restaurant_id, item_name)
+    if result is False:
+        raise ValueError("Restaurant not found")
+
+    return result
 
 
 def swap_restaurant_id(restaurant_id: int, new_id: int):
     """Swaps a restaurants ID with the second resturaunts ID."""
-    return restaurant_repository.swap_restaurant_id(restaurant_id, new_id)
+    result = restaurant_repository.swap_restaurant_id(restaurant_id, new_id)
+    if result is False:
+        raise ValueError("One or both restaurants not found")
+
+    return result
 
 def get_restaurant_by_name(name: str):
     """Returns a restaurant based on name."""

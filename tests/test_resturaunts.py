@@ -162,7 +162,7 @@ def test_delete_item_repository(restaurant_file):
 def test_swap_ids_repository(restaurant_file):
     repo.swap_restaurant_id(1, 3)
     assert repo.get_restaurant_by_id(1)["name"] == "Chipotle"
-    assert repo.swap_restaurant_id(1, 999) is None
+    assert repo.swap_restaurant_id(1, 999) is False
 
 
 # Service tests
@@ -194,7 +194,8 @@ def test_add_item_service(restaurant_file):
     item = RestaurantItem(name="Burrito", price=12)
     service.add_restaurant_items(3, item)
     assert read_file(restaurant_file)[2]["items"][0]["name"] == "Burrito"
-    assert service.add_restaurant_items(999, item) is None
+    with pytest.raises(ValueError):
+        service.add_restaurant_items(999, item)
 
 
 def test_update_item_service(restaurant_file):
@@ -202,7 +203,8 @@ def test_update_item_service(restaurant_file):
     item = read_file(restaurant_file)[0]["items"][0]
     assert item["name"] == "Soda"
     assert item["available"] is False
-    assert service.update_restaurant_item(1, "Donut", price=1) is None
+    with pytest.raises(ValueError):
+        service.update_restaurant_item(1, "Donut", price=1)
 
 
 def test_delete_item_service(restaurant_file):
