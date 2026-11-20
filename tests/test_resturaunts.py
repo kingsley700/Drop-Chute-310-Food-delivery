@@ -1,11 +1,16 @@
-
 import json
+from uuid import UUID
 import pytest
 from fastapi.testclient import TestClient
 from app.main import app
 from app.repositories import restaurant_repository as repo
 from app.services import restaurant_services as service
-from app.schemas.restaurantschemas import Restaurant, RestaurantItem
+from app.schemas.restaurantschemas import Restaurant, RestaurantCreate, RestaurantItem
+
+GOLDEN_ISLAND_ID = UUID("b6a58c65-6e0f-4d3d-af12-f95af139573a")
+BAMBOO_CHOPSTICKS_ID = UUID("6fea0a67-0de0-4513-8ee3-eb10ed2535f1")
+CHIPOTLE_ID = UUID("571a0f53-f2bf-43f9-8c60-2a8d369301ea")
+UNKNOWN_ID = UUID("247d66a6-1b4d-46d5-9a34-2257c5ab1ca2")
 
 client = TestClient(app)
 
@@ -13,11 +18,11 @@ client = TestClient(app)
 @pytest.fixture
 def restaurant_file(tmp_path, monkeypatch):
     data = [
-        {"id": 1, "name": "Golden Island", "cuisine": "Chinese", "items": [
+        {"id": str(GOLDEN_ISLAND_ID), "name": "Golden Island", "cuisine": "Chinese", "items": [
             {"name": "Can Pop", "price": 2.25, "available": True}
         ]},
-        {"id": 2, "name": "Bamboo Chopsticks", "cuisine": "Vietnamese", "items": []},
-        {"id": 3, "name": "Chipotle", "cuisine": "Mexican", "items": []}
+        {"id": str(BAMBOO_CHOPSTICKS_ID), "name": "Bamboo Chopsticks", "cuisine": "Vietnamese", "items": []},
+        {"id": str(CHIPOTLE_ID), "name": "Chipotle", "cuisine": "Mexican", "items": []}
     ]
     file = tmp_path / "restaurants.json"
     file.write_text(json.dumps(data), encoding="utf-8")
@@ -34,7 +39,7 @@ def read_file(file):
 def test_list_restaurants(restaurant_file):
     response = client.get("/restaurants")
     assert response.status_code == 200
-    assert [r["id"] for r in response.json()] == [1, 2, 3]
+    assert [r["id"] for r in response.json()] == [str(GOLDEN_ISLAND_ID), str(BAMBOO_CHOPSTICKS_ID), str(CHIPOTLE_ID)]
     for restaurant in response.json():
         Restaurant(**restaurant)
 
@@ -46,10 +51,13 @@ def test_empty_restaurants(restaurant_file):
 
 def test_create_restaurant(restaurant_file):
     response = client.post("/CreateRestaurant", json={
-        "id": 0, "name": "Tossings", "cuisine": "Italian", "items": []
+        "name": "Tossings", "cuisine": "Italian"
     })
     assert response.status_code == 201
-    assert response.json()["name"] == "Tossings"
+    created = response.json()
+    assert created["name"] == "Tossings"
+    assert str(UUID(created["id"])) == created["id"]
+    assert created["items"] == []
 
 
 def test_create_invalid_restaurant(restaurant_file):
@@ -57,34 +65,38 @@ def test_create_invalid_restaurant(restaurant_file):
 
 
 def test_add_item(restaurant_file):
-    response = client.post("/restaurants/3/items", json={"name": "Burrito", "price": 12})
+    response = client.post(f"/restaurants/{CHIPOTLE_ID}/items", json={"name": "Burrito", "price": 12})
     assert response.status_code == 201
     assert read_file(restaurant_file)[2]["items"][0]["name"] == "Burrito"
 
 
+def test_malformed_restaurant_id(restaurant_file):
+    assert client.patch("/restaurants/invalid", json={"name": "Unknown"}).status_code == 422
+
+
 def test_add_item_unknown_restaurant(restaurant_file):
-    assert client.post("/restaurants/999/items", json={"name": "Burrito", "price": 12}).status_code == 404
+    assert client.post(f"/restaurants/{UNKNOWN_ID}/items", json={"name": "Burrito", "price": 12}).status_code == 404
 
 
 def test_update_restaurant(restaurant_file):
-    response = client.patch("/restaurants/1", json={"name": "New Name", "cuisine": "Japanese"})
+    response = client.patch(f"/restaurants/{GOLDEN_ISLAND_ID}", json={"name": "New Name", "cuisine": "Japanese"})
     assert response.status_code == 200
     assert read_file(restaurant_file)[0]["name"] == "New Name"
 
 
 def test_update_unknown_restaurant(restaurant_file):
-    assert client.patch("/restaurants/999", json={"name": "Unknown"}).status_code == 404
+    assert client.patch(f"/restaurants/{UNKNOWN_ID}", json={"name": "Unknown"}).status_code == 404
 
 
 def test_update_item(restaurant_file):
-    response = client.patch("/restaurants/1/items/Can Pop", json={"name": "Soda", "price": 3})
+    response = client.patch(f"/restaurants/{GOLDEN_ISLAND_ID}/items/Can Pop", json={"name": "Soda", "price": 3})
     assert response.status_code == 200
     assert read_file(restaurant_file)[0]["items"][0]["name"] == "Soda"
 
 
 @pytest.mark.parametrize("restaurant_id,item,status", [
-    (1, "Donut", 404),
-    (999, "Can Pop", 404)
+    (GOLDEN_ISLAND_ID, "Donut", 404),
+    (UNKNOWN_ID, "Can Pop", 404)
 ])
 def test_update_item_unknown(restaurant_file, restaurant_id, item, status):
     response = client.patch(f"/restaurants/{restaurant_id}/items/{item}", json={"price": 3})
@@ -92,7 +104,7 @@ def test_update_item_unknown(restaurant_file, restaurant_id, item, status):
 
 
 def test_invalid_price(restaurant_file):
-    assert client.patch("/restaurants/1/items/Can Pop", json={"price": -1}).status_code == 422
+    assert client.patch(f"/restaurants/{GOLDEN_ISLAND_ID}/items/Can Pop", json={"price": -1}).status_code == 422
 
 
 def test_wrong_methods(restaurant_file):
@@ -116,102 +128,93 @@ def test_corrupt_file(restaurant_file):
 
 def test_get_restaurants(restaurant_file):
     assert len(repo.get_restaurants()) == 3
-    assert repo.get_restaurant_by_id(2)["name"] == "Bamboo Chopsticks"
-    assert repo.get_restaurant_by_id(999) is None
+    assert repo.get_restaurant_by_id(BAMBOO_CHOPSTICKS_ID)["name"] == "Bamboo Chopsticks"
+    assert repo.get_restaurant_by_id(UNKNOWN_ID) is None
 
 
 def test_create_restaurant_repository(restaurant_file):
     created = repo.create_restaurant({"name": "Tossings", "cuisine": "Italian"})
-    assert created["id"] == 4
+    assert str(UUID(created["id"])) == created["id"]
     assert read_file(restaurant_file)[-1]["name"] == "Tossings"
 
 
 def test_update_restaurant_repository(restaurant_file):
-    repo.update_restaurant_name(1, "New Name")
-    repo.update_restaurant_cuisine(1, "Japanese")
+    repo.update_restaurant_name(GOLDEN_ISLAND_ID, "New Name")
+    repo.update_restaurant_cuisine(GOLDEN_ISLAND_ID, "Japanese")
     data = read_file(restaurant_file)[0]
     assert data["name"] == "New Name"
     assert data["cuisine"] == "Japanese"
 
 
 def test_delete_restaurant_repository(restaurant_file):
-    assert repo.delete_restaurant(2) is True
+    assert repo.delete_restaurant(BAMBOO_CHOPSTICKS_ID) is True
     assert len(repo.get_restaurants()) == 2
-    assert repo.delete_restaurant(999) is False
+    assert repo.delete_restaurant(UNKNOWN_ID) is False
 
 
 def test_add_item_repository(restaurant_file):
-    repo.add_restaurant_items(3, {"name": "Burrito", "price": 12})
+    repo.add_restaurant_items(CHIPOTLE_ID, {"name": "Burrito", "price": 12})
     assert read_file(restaurant_file)[2]["items"][0]["name"] == "Burrito"
-    assert repo.add_restaurant_items(999, {"name": "X", "price": 1}) is None
+    assert repo.add_restaurant_items(UNKNOWN_ID, {"name": "X", "price": 1}) is None
 
 
 def test_update_item_repository(restaurant_file):
-    repo.update_restaurant_item(1, "Can Pop", new_name="Soda", price=3, available=False)
+    repo.update_restaurant_item(GOLDEN_ISLAND_ID, "Can Pop", new_name="Soda", price=3, available=False)
     item = read_file(restaurant_file)[0]["items"][0]
     assert item["name"] == "Soda"
     assert item["available"] is False
-    assert repo.update_restaurant_item(1, "Donut", price=1) is None
+    assert repo.update_restaurant_item(GOLDEN_ISLAND_ID, "Donut", price=1) is None
 
 
 def test_delete_item_repository(restaurant_file):
-    repo.delete_restaurant_item(1, "Can Pop")
+    repo.delete_restaurant_item(GOLDEN_ISLAND_ID, "Can Pop")
     assert read_file(restaurant_file)[0]["items"] == []
 
-
-def test_swap_ids_repository(restaurant_file):
-    repo.swap_restaurant_id(1, 3)
-    assert repo.get_restaurant_by_id(1)["name"] == "Chipotle"
-    assert repo.swap_restaurant_id(1, 999) is False
 
 
 # Service tests
 
 def test_get_restaurants_service(restaurant_file):
     assert len(service.get_restaurants()) == 3
-    assert service.get_restaurant_by_id(2)["name"] == "Bamboo Chopsticks"
+    assert service.get_restaurant_by_id(BAMBOO_CHOPSTICKS_ID)["name"] == "Bamboo Chopsticks"
     assert service.get_restaurant_by_name("Bamboo Chopsticks")["cuisine"] == "Vietnamese"
 
 
 def test_create_restaurant_service(restaurant_file):
-    restaurant = Restaurant(id=0, name="Tossings", cuisine="Italian", items=[])
-    assert service.create_restaurant(restaurant)["id"] == 4
+    restaurant = RestaurantCreate(name="Tossings", cuisine="Italian")
+    created = service.create_restaurant(restaurant)
+    assert str(UUID(created["id"])) == created["id"]
 
 
 def test_update_restaurant_service(restaurant_file):
-    service.update_restaurant_name(1, "New Name")
-    service.update_restaurant_cuisine(1, "Japanese")
-    assert service.get_restaurant_by_id(1)["name"] == "New Name"
-    assert service.get_restaurant_by_id(1)["cuisine"] == "Japanese"
+    service.update_restaurant_name(GOLDEN_ISLAND_ID, "New Name")
+    service.update_restaurant_cuisine(GOLDEN_ISLAND_ID, "Japanese")
+    assert service.get_restaurant_by_id(GOLDEN_ISLAND_ID)["name"] == "New Name"
+    assert service.get_restaurant_by_id(GOLDEN_ISLAND_ID)["cuisine"] == "Japanese"
 
 
 def test_delete_restaurant_service(restaurant_file):
-    assert service.delete_restaurant(2) is True
-    assert service.delete_restaurant(999) is False
+    assert service.delete_restaurant(BAMBOO_CHOPSTICKS_ID) is True
+    assert service.delete_restaurant(UNKNOWN_ID) is False
 
 
 def test_add_item_service(restaurant_file):
     item = RestaurantItem(name="Burrito", price=12)
-    service.add_restaurant_items(3, item)
+    service.add_restaurant_items(CHIPOTLE_ID, item)
     assert read_file(restaurant_file)[2]["items"][0]["name"] == "Burrito"
     with pytest.raises(ValueError):
-        service.add_restaurant_items(999, item)
+        service.add_restaurant_items(UNKNOWN_ID, item)
 
 
 def test_update_item_service(restaurant_file):
-    service.update_restaurant_item(1, "Can Pop", new_name="Soda", price=3, available=False)
+    service.update_restaurant_item(GOLDEN_ISLAND_ID, "Can Pop", new_name="Soda", price=3, available=False)
     item = read_file(restaurant_file)[0]["items"][0]
     assert item["name"] == "Soda"
     assert item["available"] is False
     with pytest.raises(ValueError):
-        service.update_restaurant_item(1, "Donut", price=1)
+        service.update_restaurant_item(GOLDEN_ISLAND_ID, "Donut", price=1)
 
 
 def test_delete_item_service(restaurant_file):
-    service.delete_restaurant_item(1, "Can Pop")
+    service.delete_restaurant_item(GOLDEN_ISLAND_ID, "Can Pop")
     assert read_file(restaurant_file)[0]["items"] == []
-
-
-def test_swap_ids_service(restaurant_file):
-    service.swap_restaurant_id(1, 3)
-    assert service.get_restaurant_by_id(1)["name"] == "Chipotle"

@@ -1,3 +1,5 @@
+from uuid import UUID
+
 from fastapi import HTTPException
 from app.repositories import cart_repo, customer_repository
 from app.schemas import cart
@@ -27,7 +29,7 @@ def get_or_create_cart(customer_id: int):
     return cart_repo.create_cart(customer_id)
 
 
-def add_item_to_cart(customer_id: int, restaurant_id: int, item_name: str, quantity: int):
+def add_item_to_cart(customer_id: int, restaurant_id: UUID, item_name: str, quantity: int):
     """Adds a menu item to the customer's active cart."""
 
     customer = customer_repository.get_customer_by_id(customer_id)

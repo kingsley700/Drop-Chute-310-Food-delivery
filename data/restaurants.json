@@ -1,6 +1,6 @@
 [
   {
-    "id": 1,
+    "id": "b6a58c65-6e0f-4d3d-af12-f95af139573a",
     "name": "Golden Island",
     "cuisine": "Chinese",
     "items": [
@@ -152,7 +152,7 @@
     ]
   },
   {
-    "id": 2,
+    "id": "6fea0a67-0de0-4513-8ee3-eb10ed2535f1",
     "name": "Bamboo Chopsticks",
     "cuisine": "Vietnamese",
     "items": [
@@ -864,12 +864,12 @@
         "available": true
       }
     ],
-    "id": 3
+    "id": "571a0f53-f2bf-43f9-8c60-2a8d369301ea"
   },
   {
     "name": "Tossings",
     "cuisine": "Italian",
     "items": [],
-    "id": 4
+    "id": "8842ffd5-a4c3-462d-8cde-08ff55617537"
   }
 ]
