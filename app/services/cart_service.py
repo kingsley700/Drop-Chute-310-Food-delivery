@@ -4,6 +4,10 @@ from app.schemas import cart
 from app.services import restaurant_services
 from app.schemas.cart import CartItem
 
+# helper function, this will set restaurant_id of the cart to None if there are no items in cart
+def reset_restaurant_id_if_empty_cart(cart):
+    if not cart.items:
+        cart.restaurant_id=None
 
 def get_or_create_cart(customer_id: int):
     """Returns the customer's active cart or creates one."""
@@ -141,6 +145,8 @@ def remove_cart_item(customer_id: int, item_name: str):
 
     if not item_found:
         raise HTTPException(status_code=404, detail="Cart item not found")
+    
+    reset_restaurant_id_if_empty_cart(cart)
 
     cart.subtotal = sum(item.price * item.quantity for item in cart.items)
     cart.tax = round(cart.subtotal * 0.12, 2)
@@ -165,6 +171,7 @@ def clear_cart(customer_id: int):
         raise HTTPException(status_code=404, detail="Cart not found")
 
     cart.items = []
+    reset_restaurant_id_if_empty_cart(cart)
     cart.subtotal = 0.0
     cart.tax = 0.0
     cart.total = 0.0
