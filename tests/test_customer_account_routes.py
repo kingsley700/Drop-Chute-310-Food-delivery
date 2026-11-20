@@ -1,5 +1,6 @@
 import pytest
 from fastapi.testclient import TestClient
+from datetime import timedelta
 
 from app.main import app
 from app.repositories import customer_repository
@@ -83,3 +84,23 @@ def test_deactivate_nonexistent_account_returns_404():
     assert response.status_code == 404
 
 # I did all of these without ANY AI yippee
+
+def test_missing_token_returns_401():
+    assert client.get("/customers/1").status_code==401
+    assert client.patch("/customers/1", json={"delivery_address": "99 New Road"}).status_code==401
+    assert client.post("/customers/1/deactivate").status_code==401
+
+
+def test_invalid_token_returns_401():
+    headers={"Authorization": "Bearer invalid token"}
+    assert client.get("/customers/1", headers=headers).status_code==401
+    assert client.patch("/customers/1", json={"delivery_address": "99 New Road"}, headers=headers).status_code==401
+    assert client.post("/customers/1/deactivate", headers=headers).status_code==401   
+
+
+def test_expired_token_returns401():
+    token=create_access_token(1, expires_delta=timedelta(seconds=-1))
+    headers={"Authorization": "Bearer "+token}
+    assert client.get("/customers/1", headers=headers).status_code==401
+    assert client.patch("/customers/1", json={"delivery_address": "99 New Road"}, headers=headers).status_code==401
+    assert client.post("/customers/1/deactivate", headers=headers).status_code==401   
