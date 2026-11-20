@@ -46,3 +46,33 @@ def get_current_customer(
             headers={"WWW-Authenticate": "Bearer"},
         )
     return customer
+
+
+def get_signed_in_customer(
+    credentials: HTTPAuthorizationCredentials | None = Depends(bearer_scheme),
+) -> Customer:
+    """For routes without a {customer_id} in the path (restaurants).
+    401 if there is no valid token or the customer is deactivated."""
+    if credentials is None:
+        raise HTTPException(
+            status_code=401,
+            detail="Not signed in",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+    try:
+        signed_in_id = verify_access_token(credentials.credentials)
+    except AuthenticationError:
+        raise HTTPException(
+            status_code=401,
+            detail="Invalid or expired token",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+
+    customer = customer_repository.get_customer_by_id(signed_in_id)
+    if customer is None or not customer.is_active:
+        raise HTTPException(
+            status_code=401,
+            detail="Invalid or expired token",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+    return customer
