@@ -118,3 +118,13 @@ Entry 11
 - Influence: Repetitive simple work that requires you to find every place where an integer ID was used before, and convert it to use UUIDs.
 - Validation: Page runs as expected, manually reviewed all changes, tests passed.
 - PR: #199
+
+
+- Student: Teppei Onishi
+- Artifact: tests\test_customer_account_routes
+- Label: AI-Assisted
+- AI tool: GPT-6.2-Sol
+- Purpose: Used it to suggest authentication cases tests should cover.
+- Influence: Suggested the cases to cover.
+- Validation: Ran the full pytest suite and it passed.
+- PR: #205
