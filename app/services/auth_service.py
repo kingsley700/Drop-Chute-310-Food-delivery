@@ -16,4 +16,6 @@ def login(data: LoginRequest) -> str:
         raise AuthenticationError(INVALID_LOGIN_MESSAGE)
     if not verify_password(data.password, customer.hashed_password):
         raise AuthenticationError(INVALID_LOGIN_MESSAGE)
+    if not customer.is_active:
+        raise AuthenticationError(INVALID_LOGIN_MESSAGE)
     return create_access_token(customer.id)
