@@ -9,8 +9,10 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.api.routes.cart import router as cart_router
 from app.api.routes import customer_routes, auth_routes
 from app.api.routes.checkout_routes import router as checkout_router
+from app.api.routes.order_routes import router as order_router
 
 app = FastAPI()
+app.include_router(order_router)
 app.include_router(checkout_router)
 app.include_router(auth_routes.router)
 app.include_router(customer_routes.router)

@@ -3,7 +3,7 @@
     "id": 1,
     "customer_id": 1,
     "status": "active",
-    "restaurant_id": "b6a58c65-6e0f-4d3d-af12-f95af139573a",
+    "restaurant_id": null,
     "items": [],
     "subtotal": 0.0,
     "tax": 0.0,
