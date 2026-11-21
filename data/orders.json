@@ -1,1 +1,36 @@
-[]
+[
+  {
+    "id": 1,
+    "customer_id": 4,
+    "restaurant_id": "b6a58c65-6e0f-4d3d-af12-f95af139573a",
+    "items": [
+      {
+        "name": "Can Pop",
+        "price": 2.25,
+        "quantity": 1
+      }
+    ],
+    "subtotal": 2.25,
+    "tax": 0.27,
+    "total": 2.52,
+    "transaction_id": "25e04435-77b0-4b01-ba47-37f2d87288c6",
+    "created_at": "2026-11-20T17:37:48.607586"
+  },
+  {
+    "id": 2,
+    "customer_id": 4,
+    "restaurant_id": "b6a58c65-6e0f-4d3d-af12-f95af139573a",
+    "items": [
+      {
+        "name": "Can Pop",
+        "price": 2.25,
+        "quantity": 1
+      }
+    ],
+    "subtotal": 2.25,
+    "tax": 0.27,
+    "total": 2.52,
+    "transaction_id": "ffdc8a31-511c-48ea-b4f4-04b1ef393deb",
+    "created_at": "2026-11-20T17:44:12.685042"
+  }
+]

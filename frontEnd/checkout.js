@@ -1,3 +1,4 @@
+
 const customerId = getCustomerId();
 
 const statusElement = document.getElementById("checkout-status");
@@ -9,14 +10,13 @@ if (customerId === null) {
     window.location.href = "login.html";
 }
 
-// Check the cart before checkout
+
+
 async function validateCheckout() {
     try {
         const response = await apiFetch(
             `/customers/${customerId}/checkout/validate`,
-            {
-                method: "POST"
-            }
+            { method: "POST" }
         );
 
         const data = await response.json();
@@ -31,25 +31,21 @@ async function validateCheckout() {
         placeOrderButton.disabled = false;
 
     } catch (error) {
-        console.error("Could not validate checkout:", error);
-        statusElement.textContent =
-            "Could not reach the server. Please try again.";
+        console.error(error);
+        statusElement.textContent = "Could not reach the server. Please try again.";
     }
 }
 
-// Display the cart
+
+// Display cart
 function displayCheckout(cart) {
     itemsElement.replaceChildren();
-
     statusElement.textContent = "Review your order before placing it.";
 
     for (const item of cart.items) {
-        const listItem = document.createElement("li");
-
-        listItem.textContent =
-            `${item.name} - ${formatPrice(item.price)} x ${item.quantity}`;
-
-        itemsElement.appendChild(listItem);
+        const li = document.createElement("li");
+        li.textContent = `${item.name} - ${formatPrice(item.price)} x ${item.quantity}`;
+        itemsElement.appendChild(li);
     }
 
     document.getElementById("checkout-subtotal").textContent =
@@ -64,7 +60,8 @@ function displayCheckout(cart) {
     totalElement.hidden = false;
 }
 
-// Create the order
+
+// Create order
 placeOrderButton.addEventListener("click", async () => {
     placeOrderButton.disabled = true;
     statusElement.textContent = "Creating your order...";
@@ -72,9 +69,7 @@ placeOrderButton.addEventListener("click", async () => {
     try {
         const response = await apiFetch(
             `/customers/${customerId}/orders`,
-            {
-                method: "POST"
-            }
+            { method: "POST" }
         );
 
         const data = await response.json();
@@ -86,22 +81,21 @@ placeOrderButton.addEventListener("click", async () => {
             return;
         }
 
-        statusElement.textContent = "Order placed successfully!";
-        itemsElement.replaceChildren();
-        totalElement.hidden = true;
+        window.location.href = `order-details.html?order_id=${data.id}`;
 
     } catch (error) {
-        console.error("Could not create order:", error);
-        statusElement.textContent =
-            "Could not reach the server. Please try again.";
+        console.error(error);
+        statusElement.textContent = "Could not reach the server. Please try again.";
         placeOrderButton.disabled = false;
     }
 });
 
-// Cancel checkout and return to the cart
+
+// Cancel checkout
 document.getElementById("cancel-button").addEventListener("click", () => {
     window.location.href = "customer.html";
 });
+
 
 // Format prices
 function formatPrice(price) {
@@ -111,6 +105,8 @@ function formatPrice(price) {
     });
 }
 
+
+// Start page
 if (customerId !== null) {
     validateCheckout();
 }

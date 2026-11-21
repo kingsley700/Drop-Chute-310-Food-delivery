@@ -8,7 +8,6 @@ from app.schemas.order import Order
 from app.services import checkout_service, cart_service
 
 
-# Create order from validated cart
 def create_order(customer_id: int):
     cart = checkout_service.validate_checkout(customer_id)
     cart = checkout_service.validate_menu_items(cart)
@@ -27,8 +26,21 @@ def create_order(customer_id: int):
         transaction_id=str(uuid4())
     )
 
-    # Save order before clearing cart
+    #Save order before clearing cart
     created_order = order_repo.create_order(order)
     cart_service.clear_cart(customer_id)
 
     return created_order
+
+
+
+def get_order_by_id(customer_id: int, order_id: int):
+    order = order_repo.get_order_by_id(order_id)
+
+    if order is None:
+        raise HTTPException(404, "Order not found")
+
+    if order.customer_id != customer_id:
+        raise HTTPException(403, "You cannot access this order")
+
+    return order

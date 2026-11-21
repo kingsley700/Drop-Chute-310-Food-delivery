@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drop Chute - Order Details</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="api.js"></script>
+    <script type="module" src="order-details.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1>Order Details</h1>
+    </header>
+
+    <main>
+        <button id="back-button" type="button">Back to Shopping</button>
+
+        <p id="order-status" role="status">Loading order...</p>
+
+        <section id="order-details" hidden>
+            <h2 id="restaurant-name"></h2>
+
+            <h3>Items</h3>
+            <ul id="order-items"></ul>
+
+            <h3>Order Summary</h3>
+            <p id="order-subtotal"></p>
+            <p id="order-tax"></p>
+            <h3 id="order-total"></h3>
+
+            <p id="order-date"></p>
+            <p id="order-number"></p>
+        </section>
+    </main>
+</body>
+
+</html>
