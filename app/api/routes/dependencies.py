@@ -1,12 +1,15 @@
 from fastapi import Depends, HTTPException
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
-
 from app.exceptions import AuthenticationError, NotFoundError
 from app.repositories import customer_repository
 from app.schemas.customerschema import Customer
 from app.tokens import verify_access_token
 
 bearer_scheme = HTTPBearer(auto_error=False)
+
+
+
+
 
 
 def get_current_customer(
