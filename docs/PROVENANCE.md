@@ -139,6 +139,7 @@ Entry 13
 - Validation: Ran all tests and passed as expected
 - PR: #204
 
+Entry 14
 - Student: Teppei Onishi
 - Artifact: app/services/cart_service.py, app/schemas/cart.py, app/api/routes/restaurants.py, app/services/restaurant_services.py, tests/Test_cart.py, tests/test_resturaunts.py
 - Label: AI-Generated
@@ -148,7 +149,7 @@ Entry 13
 - Validation: Page runs as expected, manually reviewed all changes, tests passed.
 - PR: #199
 
-
+Entry 15
 - Student: Teppei Onishi
 - Artifact: tests\test_customer_account_routes
 - Label: AI-Assisted
@@ -157,3 +158,24 @@ Entry 13
 - Influence: Suggested the cases to cover.
 - Validation: Ran the full pytest suite and it passed.
 - PR: #206
+
+Entry 16
+- Student: Teppei Onishi
+- Artifact: app/services/cart_service.py
+- Label: AI-Assisted
+- AI tool: GPT-6.2-Sol
+- Purpose: Used it to guide me in the right direction to solve bug
+- Influence: Little hints as to what was needed.
+- Validation: Full run through of page to make sure cart restauarant_id would reset.
+- PR: #178
+
+Entry 17
+- Student: Teppei Onishi
+- Artifact: app/api/routes/restaurants.py, app/repositories/restaurant_repository.py, app/services/restaurant_services.py, tests/test_resturaunts.py
+- Label: AI-Assisted
+- AI tool: GPT-6.2-Sol
+- Purpose: Used it to guide improvements to restaurant error handling across the API, service, and repository layers.
+- Influence: Suggested how to handle missing restaurants and menu items and return clear 404 responses.
+- Validation: Updated tests to check how the repository and service handle missing restaurants and menu items.
+- PR: #197
+
