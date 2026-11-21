@@ -177,3 +177,8 @@ document.getElementById("clear-cart-button").addEventListener("click", () => {
 if (customerId !== null) {
     loadRestaurants();
 }
+
+// Go to checkout
+document.getElementById("checkout-button").addEventListener("click", () => {
+    window.location.href = "checkout.html";
+});

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Drop Chute</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <main>
+        <h1>Checkout</h1>
+
+        <p id="checkout-status" role="status">Checking your cart...</p>
+
+        <ul id="checkout-items"></ul>
+
+        <div id="checkout-total" hidden>
+            <p id="checkout-subtotal"></p>
+            <p id="checkout-tax"></p>
+            <h3 id="checkout-grand-total"></h3>
+        </div>
+
+        <button id="place-order-button" type="button" disabled>
+            Place Order
+        </button>
+
+        <button id="cancel-button" type="button">
+            Cancel
+        </button>
+    </main>
+
+    <script src="api.js"></script>
+    <script src="checkout.js"></script>
+</body>
+
+</html>
