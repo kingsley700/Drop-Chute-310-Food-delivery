@@ -13,6 +13,8 @@ client = TestClient(app)
 
 
 #regression test req fufillment - done by vassili
+#bug found during dev of epic issue#84, fixed in pull request#178
+#178
 def test_order_from_different_restaurant_after_clearing_cart(setup):
     cart_service.add_item_to_cart(1, uuid4(), "Burger", 1)
     cart_service.clear_cart(1)
