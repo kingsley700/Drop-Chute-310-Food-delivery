@@ -3,6 +3,7 @@ from uuid import uuid4
 from app.services import cart_service
 from app.repositories import restaurant_repository
 import pytest
+from uuid import UUID
 from fastapi.testclient import TestClient
 from app.main import app
 from app.repositories import customer_repository, restaurant_repository, cart_repo, order_repo
@@ -62,14 +63,72 @@ def test_order_flow(setup):
 
 
 
-
-
-
-
 #teppei
+@pytest.fixture
+def unavailable_item_customer(tmp_path, monkeypatch):
+    #arrange temp files
+    for repo, name in [(customer_repository, "customers"), (restaurant_repository, "restaurants"), (cart_repo, "carts"), (order_repo, "orders")]:
+        file = tmp_path / f"{name}.json"
+        file.write_text("[]")
+        monkeypatch.setattr(repo, "filep", str(file))
+    #auth
+    monkeypatch.setenv("JWT_SECRET_KEY", "test-secret-key-that-is-long-enough-for-hs256")
+    #test user
+    return customer_repository.create_customer("Test", "test@example.com", hash_password("Password123"), "123 Street")
 
+def test_unavailable_item_workflow(unavailable_item_customer):
+    client=TestClient(app)
+    customer=unavailable_item_customer
+    customer_url=f"/customers/{customer.id}"
 
+# Sign in and get an access token.
+    login=client.post("/auth/login", json={"email": customer.email, "password": "Password123"})
+    assert login.status_code==200
 
+# Create a restaurant.
+    headers={"Authorization": f"Bearer {login.json()['access_token']}"}
+    restaurant=client.post("/CreateRestaurant", json={"name": "McDonalds", "cuisine": "Burger"}, headers=headers)
+    assert restaurant.status_code==201
+
+# Create an item.
+    restaurant_id=restaurant.json()["id"]
+    menu_item=client.post(f"/restaurants/{restaurant_id}/items", json={"name": "French Fries", "price": 5}, headers=headers)
+    assert menu_item.status_code==201
+
+# Add two servings of French Fries to the cart.
+    cart_url=f"{customer_url}/cart"
+    added=client.post(f"{cart_url}/items", json={"restaurant_id": restaurant_id, "item_name": "French Fries", "quantity": 2}, headers=headers)
+    assert added.status_code==200
+
+# Mark French Fries as unavailable.
+    updated_item=restaurant_repository.update_restaurant_item(UUID(restaurant_id), "French Fries", available=False)
+    assert updated_item["available"] is False
+
+# Verify adding more French Fries is rejected
+    rejected=client.post(f"{cart_url}/items", json={"restaurant_id": restaurant_id, "item_name": "French Fries", "quantity": 2}, headers=headers)
+    assert rejected.status_code==400
+    assert rejected.json()["detail"]=="Menu item is unavailable"
+
+# Verify checkout is rejected.
+    checkout = client.post(f"{customer_url}/checkout/validate", headers=headers)
+    assert checkout.status_code==400
+    assert checkout.json()["detail"]=="Menu item unavailable"
+
+# Verify order creation is rejected.
+    orders_url=f"{customer_url}/orders"
+    order=client.post(orders_url, headers=headers)
+    assert order.status_code==400
+    assert order.json()["detail"]=="Menu item unavailable"
+
+# Verify order history is empty
+    history=client.get(orders_url, headers=headers)
+    assert history.status_code==200
+    assert history.json()==[]
+
+# Verify cart still contains two servings.
+    cart=client.get(cart_url, headers=headers)
+    assert cart.status_code==200
+    assert cart.json()["items"]==added.json()["items"]
 
 
 #rayan
