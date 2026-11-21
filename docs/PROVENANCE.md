@@ -179,3 +179,23 @@ Entry 17
 - Validation: Updated tests to check how the repository and service handle missing restaurants and menu items.
 - PR: #197
 
+Entry 17
+- Student(s): Vassilios Simeonidis
+- Artifact: repo layer:cart_repo, order_repo, order_repo, api layer:cart, order_routes, checkout_routes, service:cart_service, order_service
+- Label: AI-REVISED
+- AI tool: chatgpt
+- Purpose: wrote sudo code and functions, then chat turned those into python
+- Influence: ai assisted in creating the final product from a human base and then used to 
+- Validation: tests running with no issues, and code was double checked by me thoroughly. the other member also checked my code 
+- PR: both epics done by me
+
+Entry 17
+- Student(s): Vassilios Simeonidis
+- Artifact: app/tests(most files were touched)
+- Label: AI-Assisten
+- AI tool: chatgpt
+- Purpose: to refactor the style and whitespaces of the tests. new test were written by me, and it suggested some overlapping tests
+- Influence: ai just did formatting 
+- Validation: ai did not write the code
+- PR: #197
+
