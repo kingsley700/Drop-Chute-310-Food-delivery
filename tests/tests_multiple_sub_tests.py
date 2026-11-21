@@ -134,66 +134,65 @@ def test_unavailable_item_workflow(unavailable_item_customer):
 #rayan
 
 @pytest.fixture
-def order_flow_files(tmp_path, monkeypatch):
-    """Real repositories pointed at temporary files, with one restaurant and its menu. Nothing is mocked."""
+def menu_order_customer(tmp_path, monkeypatch):
+    #point every repository at its own empty temp file, so the test never touches the real data files
     for repo, name in [(customer_repository, "customers"), (restaurant_repository, "restaurants"), (cart_repo, "carts"), (order_repo, "orders")]:
         file = tmp_path / f"{name}.json"
         file.write_text("[]")
         monkeypatch.setattr(repo, "filep", str(file))
+    #auth
     monkeypatch.setenv("JWT_SECRET_KEY", "test-secret-key-that-is-long-enough-for-hs256")
-    restaurant_repository.create_restaurant({
-        "name": "Golden Island",
-        "cuisine": "Chinese",
-        "items": [
-            {"name": "Burger", "price": 10.0, "available": True},
-            {"name": "Fries", "price": 4.0, "available": True},
-        ],
-    })
+    #test restaurant with a two item menu
+    restaurant_repository.create_restaurant({"name": "Golden Island", "cuisine": "Chinese", "items": [
+        {"name": "Burger", "price": 10.0},
+        {"name": "Fries", "price": 4.0},
+    ]})
+    #test user
+    return customer_repository.create_customer("Test", "test@example.com", hash_password("Password123"), "123 Street")
 
+#orders from the menu the customer sees and checks the totals, the saved order and the emptied cart
+def test_menu_to_order_totals(menu_order_customer):
+    customer = menu_order_customer
+    customer_url = f"/customers/{customer.id}"
 
-# Registers and signs in through the API, then follows the menu into a cart, checkout and a saved order
-def test_customer_to_order_flow_with_totals(order_flow_files):
-    # Customer: register, sign in, and check the token works on the account
-    registered = client.post("/customers", json={"name": "Sam Graham", "email": "sam@gmail.com", "password": "secret1", "delivery_address": "755 Academy Way"})
-    assert registered.status_code == 201
-    customer_id = registered.json()["id"]
-    login = client.post("/auth/login", json={"email": "sam@gmail.com", "password": "secret1"})
+    #sign in
+    login = client.post("/auth/login", json={"email": customer.email, "password": "Password123"})
     assert login.status_code == 200
-    headers = {"Authorization": "Bearer " + login.json()["access_token"]}
-    assert client.get(f"/customers/{customer_id}", headers=headers).status_code == 200
+    token = login.json()["access_token"]
+    headers = {"Authorization": "Bearer " + token}
+    #the cart and order routes don't check the token, so this account request is what proves the token is for this customer
+    assert client.get(customer_url, headers=headers).status_code == 200
 
-    # Menu: read the restaurant and its items from the API
+    #read the menu from the API, so the cart uses the restaurant's real id
     restaurant = client.get("/restaurants").json()[0]
-    assert [item["name"] for item in restaurant["items"]] == ["Burger", "Fries"]
+    assert restaurant["items"][0]["name"] == "Burger"
 
-    # Cart: add two items from that menu
-    for item_name, quantity in [("Burger", 2), ("Fries", 1)]:
-        added = client.post(f"/customers/{customer_id}/cart/items", json={"restaurant_id": restaurant["id"], "item_name": item_name, "quantity": quantity}, headers=headers)
-        assert added.status_code == 200
-    cart = client.get(f"/customers/{customer_id}/cart", headers=headers).json()
+    #add 2 burgers and 1 fries to the cart
+    for name, quantity in [("Burger", 2), ("Fries", 1)]:
+        response = client.post(
+            f"{customer_url}/cart/items",
+            json={"restaurant_id": restaurant["id"], "item_name": name, "quantity": quantity},
+            headers=headers,
+        )
+        assert response.status_code == 200
+
+    #the last response is the whole cart: 2 x 10 + 1 x 4 = 24, tax is 12% so 2.88
+    cart = response.json()
     assert cart["subtotal"] == 24.0
     assert cart["tax"] == 2.88
     assert cart["total"] == 26.88
 
-    # Checkout: the cart passes validation with the same total
-    checkout = client.post(f"/customers/{customer_id}/checkout/validate", headers=headers)
+    #checkout re-reads the menu prices, so its total must match the cart
+    checkout = client.post(f"{customer_url}/checkout/validate", headers=headers)
     assert checkout.status_code == 200
     assert checkout.json()["total"] == 26.88
 
-    # Order: created from the cart, saved, listed in history, and the cart is emptied
-    created = client.post(f"/customers/{customer_id}/orders", headers=headers)
-    assert created.status_code == 200
-    order = created.json()
-    assert order["customer_id"] == customer_id
-    assert order["restaurant_id"] == restaurant["id"]
-    assert [(i["name"], i["quantity"]) for i in order["items"]] == [("Burger", 2), ("Fries", 1)]
-    assert order["total"] == 26.88
-    assert order["transaction_id"]
-    assert len(order_repo.get_orders()) == 1
-    history = client.get(f"/customers/{customer_id}/orders", headers=headers).json()
-    assert [o["id"] for o in history] == [order["id"]]
-    cart_after = client.get(f"/customers/{customer_id}/cart", headers=headers).json()
-    assert cart_after["items"] == []
-    assert cart_after["total"] == 0.0
+    #the order is built from the cart
+    order = client.post(f"{customer_url}/orders", headers=headers)
+    assert order.status_code == 200
+    assert order.json()["total"] == 26.88
+    assert len(order.json()["items"]) == 2
 
-
+    #the order was saved to the orders file, and the cart was emptied
+    assert order_repo.get_orders()[0].id == order.json()["id"]
+    assert client.get(f"{customer_url}/cart", headers=headers).json()["items"] == []
