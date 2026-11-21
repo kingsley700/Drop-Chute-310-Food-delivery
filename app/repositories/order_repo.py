@@ -1,4 +1,3 @@
-
 import json
 
 from app.schemas.order import Order
@@ -6,7 +5,7 @@ from app.schemas.order import Order
 filep = "data/orders.json"
 
 
-# Read and write orders
+
 def _read_data():
     with open(filep, "r", encoding="utf-8") as file:
         text = file.read().strip()
@@ -30,11 +29,12 @@ def get_order_by_id(order_id: int):
     return None
 
 
+
 def get_orders_by_customer(customer_id: int):
-    return [order for order in get_orders() if order.customer_id == customer_id]
+    orders = [order for order in get_orders() if order.customer_id == customer_id]
+    return sorted(orders, key=lambda order: order.created_at, reverse=True)
 
 
-# Create order
 def create_order(order):
     records = _read_data()
     order_id = max((record["id"] for record in records), default=0) + 1

@@ -1,4 +1,3 @@
-
 from uuid import uuid4
 
 from fastapi import HTTPException
@@ -6,6 +5,7 @@ from fastapi import HTTPException
 from app.repositories import order_repo
 from app.schemas.order import Order
 from app.services import checkout_service, cart_service
+
 
 
 def create_order(customer_id: int):
@@ -26,12 +26,11 @@ def create_order(customer_id: int):
         transaction_id=str(uuid4())
     )
 
-    #Save order before clearing cart
+
     created_order = order_repo.create_order(order)
     cart_service.clear_cart(customer_id)
 
     return created_order
-
 
 
 def get_order_by_id(customer_id: int, order_id: int):
@@ -44,3 +43,8 @@ def get_order_by_id(customer_id: int, order_id: int):
         raise HTTPException(403, "You cannot access this order")
 
     return order
+
+
+
+def get_order_history(customer_id: int):
+    return order_repo.get_orders_by_customer(customer_id)
