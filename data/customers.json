@@ -14,5 +14,13 @@
     "hashed_password": "$2b$12$CuyVnOvLKedCxFOiM0PKEu4h4XcXcGeDvtyH8TXWSfImJs308avza",
     "delivery_address": "Rayanville",
     "is_active": true
+  },
+  {
+    "id": 4,
+    "name": "asd",
+    "email": "a@a.a",
+    "hashed_password": "$2b$12$2EGGCgGkJ/SVSafZ8sT3T.ZeVLtTZfwQ3W/sbbJ9nWxqz.PcJizHy",
+    "delivery_address": "asd",
+    "is_active": true
   }
 ]

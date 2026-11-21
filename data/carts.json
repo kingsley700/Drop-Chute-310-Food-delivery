@@ -24,5 +24,15 @@
     "subtotal": 2.25,
     "tax": 0.27,
     "total": 2.52
+  },
+  {
+    "id": 3,
+    "customer_id": 4,
+    "status": "active",
+    "restaurant_id": null,
+    "items": [],
+    "subtotal": 0.0,
+    "tax": 0.0,
+    "total": 0.0
   }
 ]
